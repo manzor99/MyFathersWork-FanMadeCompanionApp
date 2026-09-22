@@ -395,7 +395,7 @@ public static partial class TheCostOfDisease
     private static void FeverHeart2_1(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.EndOfGeneration, PopUpIcon.MFWlogo,
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.EndOfGeneration, PopUpIcon.S1_HeartToken,
             PopUpButton.Confirm, globalData.TheCostOfDiseaseVars.RandomElement([S5Fate1, S5Fate2], 5));
     }
 
