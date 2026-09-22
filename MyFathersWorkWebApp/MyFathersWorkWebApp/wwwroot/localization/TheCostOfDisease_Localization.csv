@@ -314,7 +314,7 @@ ScoreEntryP4Confirm_Content;Thank you for recording this important historical in
 TieBreakerMasterwork_Title;<b>First Tie-Breaker: Masterwork Completion</b>
 TieBreakerMasterwork_Content;There is a tie for first place between: <b>{{0=...}}</b>.<br /><br />Did all tied players complete their Masterwork?
 TieBreakerMasterworkSelect_Title;<b>First Tie-Breaker: Select Completed Masterworks</b>
-TieBreakerMasterworkSelect_Content;Select the tied players who <b>completed</b> their Masterwork:
+TieBreakerMasterworkSelect_Content;Which of the tied players completed their Masterwork?
 TieBreakerUpgrades_Title;<b>Second Tie-Breaker: Estate Upgrades</b>
 TieBreakerUpgrades_Content;Which of the remaining tied players built the most <b>Estate Upgrades</b>?
 WinnerDisplay_Title;<b>Final Standings</b>

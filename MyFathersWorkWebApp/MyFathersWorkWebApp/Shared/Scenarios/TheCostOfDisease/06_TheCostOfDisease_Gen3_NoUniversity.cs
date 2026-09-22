@@ -513,11 +513,8 @@ public static partial class TheCostOfDisease
         globalData.ActiveWindow.AddDefaultContent();
         globalData.ActiveWindow.AddChoose();
 
-        foreach (string player in globalData.GetActivePlayers())
-        {
-            if (globalData.TheCostOfDiseaseVars.CustomMwCompleted.GetValueOrDefault(player, false)) continue;
-            string p = player;
-            globalData.ActiveWindow.AddPlayerOption(p, _ =>
+        globalData.ActiveWindow.AddAllPlayersNamesAsOptions(
+            p =>
             {
                 globalData.TmpValues[_MW_COMPLETE_PLAYER_TMP] = p;
                 if (!globalData.TheCostOfDiseaseVars.CustomMwCompleted.GetValueOrDefault(p, false))
@@ -527,8 +524,9 @@ public static partial class TheCostOfDisease
                 }
 
                 CompleteMasterworkStory(globalData);
-            });
-        }
+            },
+            PlayerFormatterTag.None,
+            player => !globalData.TheCostOfDiseaseVars.CustomMwCompleted.GetValueOrDefault(player, false));
 
         globalData.ActiveWindow.AddNextContentWithLinks(1, [_ => { }], true);
     }

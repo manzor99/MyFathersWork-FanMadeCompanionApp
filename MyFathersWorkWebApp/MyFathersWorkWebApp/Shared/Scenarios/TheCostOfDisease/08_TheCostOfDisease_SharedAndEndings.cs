@@ -297,36 +297,17 @@ public static partial class TheCostOfDisease
         globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent();
 
-        foreach (string player in globalData.TheCostOfDiseaseVars.TiedPlayers)
-        {
-            string p = player;
-            globalData.ActiveWindow.AddCheckboxOption(p, globalData.TheCostOfDiseaseVars.TieSelection.GetValueOrDefault(p, false),
-                val => globalData.TheCostOfDiseaseVars.TieSelection[p] = val);
-        }
-
-        globalData.ActiveWindow.AddClickHereToContinue(TieBreakerMasterworkResolve);
-    }
-
-    private static void TieBreakerMasterworkResolve(GlobalData globalData)
-    {
-        List<string> selected = globalData.TheCostOfDiseaseVars.TiedPlayers
-            .Where(p => globalData.TheCostOfDiseaseVars.TieSelection.GetValueOrDefault(p, false))
-            .ToList();
-
-        if (selected.Count == 1)
-        {
-            globalData.TheCostOfDiseaseVars.Winner = selected[0];
-            WinnerDisplay(globalData);
-        }
-        else
-        {
-            if (selected.Count > 1)
+        globalData.ActiveWindow.AddAllPlayersNamesAsOptions(
+            p =>
             {
-                globalData.TheCostOfDiseaseVars.TiedPlayers = selected;
-            }
+                globalData.TheCostOfDiseaseVars.Winner = p;
+                WinnerDisplay(globalData);
+            },
+            PlayerFormatterTag.None,
+            globalData.TheCostOfDiseaseVars.TiedPlayers.Contains);
 
-            TieBreakerUpgrades(globalData);
-        }
+        // "They are still tied / nobody qualifies" -> fall through to the next tie-breaker.
+        globalData.ActiveWindow.AddNextContentWithLinks(1, [TieBreakerUpgrades], true);
     }
 
     private static void TieBreakerUpgrades(GlobalData globalData)
@@ -336,15 +317,14 @@ public static partial class TheCostOfDisease
         globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent();
 
-        foreach (string player in globalData.TheCostOfDiseaseVars.TiedPlayers)
-        {
-            string p = player;
-            globalData.ActiveWindow.AddPlayerOption(p, _ =>
+        globalData.ActiveWindow.AddAllPlayersNamesAsOptions(
+            p =>
             {
                 globalData.TheCostOfDiseaseVars.Winner = p;
                 WinnerDisplay(globalData);
-            });
-        }
+            },
+            PlayerFormatterTag.None,
+            globalData.TheCostOfDiseaseVars.TiedPlayers.Contains);
 
         globalData.ActiveWindow.AddNextContentWithLinks(1, [
             _ =>

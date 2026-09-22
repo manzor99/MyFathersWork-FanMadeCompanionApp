@@ -169,6 +169,7 @@ DetEffect3_0_Content;At the start of each round, players with an <b>Immortality 
 DetEffect4_0_Content;For the rest of the game, if a player with an <b>Immortality Token</b> ever reaches the final space of the <icon=Insanity_Icon> Track or is overtaken by the <icon=AngryMob_Icon>, they must consult the <b>Immortality Deterioration</b> section on the Storybook HUB.
 DeteriorationHub_Content1;<link=0>Click here the first time a player with an Immortality Token reaches the end of the Insanity Track or is overtaken by the Angry Mob...</link>
 DetEffect4Killed_Content;The player who suffered cellular collapse must discard their <b>Immortality Token</b> and place their Scientist piece on the <b>Cemetery</b> for the remainder of the round.<br /><br />The player to their left immediately <b>gains 1 Body</b> from the supply!
+TieBreakerMasterworkSelect_Content1;<link=0>They are still tied / none of them did</link>
 TieBreakerUpgrades_Content1;<link=0>Still tied</link>
 //====== Gen 3 - GloomyGothic Gameplay & Popups ======;
 GloomyGothic_SafeAndProtected_Content;With the Fraternity of Hunters patrolling the streets, the <icon=AngryMob_Icon> token does not move during this round.{{0=?| However, you must still pay taxes at the end of the round.|}}
