@@ -93,6 +93,17 @@ public class GlobalData
                 });
                 break;
             }
+            case ScenarioId.TimeOfWar:
+            {
+                MethodInfo         method = typeof(ATimeOfWar).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
+                Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
+                UndoStack.Push(new UndoData
+                {
+                    Callback = action,
+                    JsonData = JsonConvert.SerializeObject(this)
+                });
+                break;
+            }
         }
     }
 
@@ -215,6 +226,7 @@ public class GlobalData
         }
 
         TheCostOfDiseaseVars.Reset(this);
+        ATimeOfWarVars.Reset(this);
         ActiveHub        = null;
         ActiveWindow     = null;
         ActivePopup      = null;
@@ -257,12 +269,14 @@ public class GlobalData
         string scenarioLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Localization.csv",
+            ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Localization.csv",
             _                        => string.Empty
         };
 
         string scenarioGameplayLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Gameplay_Localization.csv",
+            ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Gameplay_Localization.csv",
             _                        => string.Empty
         };
 
@@ -293,6 +307,21 @@ public class GlobalData
                 CostOfDiseaseHubId.NoUniversity => TheCostOfDisease.NoUniversity,
                 CostOfDiseaseHubId.University   => TheCostOfDisease.University,
                 _                               => null
+            };
+        }
+
+        if (ScenarioId == ScenarioId.TimeOfWar)
+        {
+            return ATimeOfWarVars.HubId switch
+            {
+                TimeOfWarHubId.TakeSides    => ATimeOfWar.TakeSides,
+                TimeOfWarHubId.TimeTravel   => ATimeOfWar.TimeTravel,
+                TimeOfWarHubId.Martial      => ATimeOfWar.Martial,
+                TimeOfWarHubId.Warning      => ATimeOfWar.Warning,
+                TimeOfWarHubId.Paradox      => ATimeOfWar.Paradox,
+                TimeOfWarHubId.MonarchReign => ATimeOfWar.MonarchReign,
+                TimeOfWarHubId.Peace        => ATimeOfWar.Peace,
+                _                           => null
             };
         }
 
