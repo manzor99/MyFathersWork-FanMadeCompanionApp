@@ -112,36 +112,6 @@ public static partial class FearOfTheUnknown
     }
 
     // =========================================================================
-    // SHARED GEN 2 -> GEN 3 ISOLATION BRICK REWARD (S4IsoBrick)
-    // =========================================================================
-
-    internal static void S4IsoBrick(GlobalData globalData)
-    {
-        globalData.SaveToUndo();
-        FearOfTheUnknownVars vars = globalData.FearOfTheUnknownVars;
-
-        globalData.ActiveWindow = new GameplayWindow(globalData);
-        globalData.ActiveWindow.AddDefaultTitle();
-        globalData.ActiveWindow.AddDefaultContent(str =>
-            str.FormatWithReplacement(0, vars.Newspaper));
-        globalData.ActiveWindow.AddClickHereToContinue(S4IsoBrick_Setup);
-    }
-
-    private static void S4IsoBrick_Setup(GlobalData globalData)
-    {
-        int vpBonus = Random.Shared.Next(2, 6);
-        globalData.ActivePopup = new GameplayPopup(
-            globalData,
-            PopUpTitle.Setup,
-            PopUpIcon.S2_BrickTokens,
-            PopUpButton.Accept,
-            IsolationIntro,
-            str => str
-                .FormatWithReplacement(0, vpBonus)
-                .FormatWithCondition(0, () => globalData.PlayersNum >= 4));
-    }
-
-    // =========================================================================
     // GENERATION III - ISOLATION HUB (Early, Middle, Late Years)
     // =========================================================================
 
@@ -388,7 +358,7 @@ public static partial class FearOfTheUnknown
                 }
             },
             true,
-            str => str.FormatWithReplacement(0, bribeAmount));
+            str => str.FormatWithReplacement(0, bribeAmount.ToString()));
         globalData.ActiveWindow.AddNextContentWithLinks(
             2,
             new List<Action<GlobalData>>
@@ -724,7 +694,7 @@ public static partial class FearOfTheUnknown
             PopUpIcon.AngryMob_Icon,
             PopUpButton.Accept,
             Caravancheck,
-            str => str.FormatWithReplacement(0, moveLeft));
+            str => str.FormatWithReplacement(0, moveLeft.ToString()));
     }
 
     internal static void SmugEvent2B(GlobalData globalData)
