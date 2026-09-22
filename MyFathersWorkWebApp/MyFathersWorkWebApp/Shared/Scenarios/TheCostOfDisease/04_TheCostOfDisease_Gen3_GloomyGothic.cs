@@ -579,7 +579,8 @@ public static partial class TheCostOfDisease
         globalData.SaveToUndo();
         globalData.ActiveWindow = new GameplayWindow(globalData);
         globalData.ActiveWindow.AddDefaultTitle();
-        globalData.ActiveWindow.AddDefaultContent();
+        globalData.ActiveWindow.AddDefaultContent(content =>
+            content.FormatWithReplacement(0, globalData.TheCostOfDiseaseVars.DonatedVpTotal.ToString()));
         globalData.ActiveWindow.AddNextContentWithLinks(1, [OhYesTheyDead, ConfrontationFail], true,
             content => content.FormatWithReplacement(0, globalData.TheCostOfDiseaseVars.DonatedVpTotal.ToString()));
     }
