@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -29,9 +29,13 @@ public class GlobalData
     public string                     PlayerCName          { get; set; } = string.Empty;
     public string                     PlayerDName          { get; set; } = string.Empty;
     public string                     TownName             { get; set; } = string.Empty;
+    [JsonIgnore] public string        CityName             => TownName;
+    [JsonIgnore] public string        NewspaperName        => FearOfTheUnknownVars.Newspaper;
+    [JsonIgnore] public string[]      PlayersName          => [PlayerAName, PlayerBName, PlayerCName, PlayerDName, string.Empty];
     public Years                      Years                { get; set; } = Years.Early;
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();
+    public FearOfTheUnknownVars       FearOfTheUnknownVars { get; }      = new();
     public Dictionary<string, object> TmpValues            { get; }      = new();
 
     [JsonIgnore] public GameplayHub?        ActiveHub        { get; set; }
@@ -48,6 +52,7 @@ public class GlobalData
     public GlobalData()
     {
         TheCostOfDiseaseVars.Reset(this);
+        FearOfTheUnknownVars.Reset(this);
     }
 
     public string GetLocalizedUITag(string tag)
@@ -83,6 +88,17 @@ public class GlobalData
             case ScenarioId.CostOfDisease:
             {
                 MethodInfo         method = typeof(TheCostOfDisease).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
+                Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
+                UndoStack.Push(new UndoData
+                {
+                    Callback = action,
+                    JsonData = JsonConvert.SerializeObject(this)
+                });
+                break;
+            }
+            case ScenarioId.FearOfUnknown:
+            {
+                MethodInfo         method = typeof(FearOfTheUnknown).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
                 Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
                 UndoStack.Push(new UndoData
                 {
@@ -213,6 +229,7 @@ public class GlobalData
         }
 
         TheCostOfDiseaseVars.Reset(this);
+        FearOfTheUnknownVars.Reset(this);
         ActiveHub        = null;
         ActiveWindow     = null;
         ActivePopup      = null;
@@ -255,12 +272,14 @@ public class GlobalData
         string scenarioLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Localization.csv",
+            ScenarioId.FearOfUnknown => "localization/FearOfTheUnknown_Localization.csv",
             _                        => string.Empty
         };
 
         string scenarioGameplayLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Gameplay_Localization.csv",
+            ScenarioId.FearOfUnknown => "localization/FearOfTheUnknown_Gameplay_Localization.csv",
             _                        => string.Empty
         };
 
@@ -287,6 +306,21 @@ public class GlobalData
                 CostOfDiseaseHubId.Devastation => TheCostOfDisease.Devastation,
                 CostOfDiseaseHubId.Hospital    => TheCostOfDisease.Hospital,
                 _                              => null
+            };
+        }
+
+        if (ScenarioId == ScenarioId.FearOfUnknown)
+        {
+            return FearOfTheUnknownVars.HubId switch
+            {
+                FearOfUnknownHubId.Mania      => FearOfTheUnknown.Mania,
+                FearOfUnknownHubId.Foreign    => FearOfTheUnknown.Foreign,
+                FearOfUnknownHubId.Creature   => FearOfTheUnknown.Creature,
+                FearOfUnknownHubId.Isolation  => FearOfTheUnknown.Isolation,
+                FearOfUnknownHubId.Tension    => FearOfTheUnknown.Tension,
+                FearOfUnknownHubId.Privatized => FearOfTheUnknown.Privatized,
+                FearOfUnknownHubId.Liberal    => FearOfTheUnknown.Liberal,
+                _                             => null
             };
         }
 

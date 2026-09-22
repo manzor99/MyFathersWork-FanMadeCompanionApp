@@ -1,4 +1,4 @@
-﻿@page "/PlayersScenarioLanguage"
+@page "/PlayersScenarioLanguage"
 @inject NavigationManager Nav
 @inject HttpClient        Http
 
@@ -55,12 +55,18 @@
         GlobalData.ActiveInputPopup = null;
         
         GlobalData.TheCostOfDiseaseVars.Reset(GlobalData);
+        GlobalData.FearOfTheUnknownVars.Reset(GlobalData);
 
         switch (GlobalData.ScenarioId)
         {
             case ScenarioId.CostOfDisease:
             {
                 TheCostOfDisease.Init(GlobalData);
+                break;
+            }
+            case ScenarioId.FearOfUnknown:
+            {
+                FearOfTheUnknown.Init(GlobalData);
                 break;
             }
             default:
