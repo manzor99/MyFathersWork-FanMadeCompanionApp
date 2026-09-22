@@ -199,9 +199,9 @@ public static partial class FearOfTheUnknown
         }
         else
         {
-            globalData.ActiveHub.SetDefaultTitle(
-                "Title",
-                str => str.FormatWithCondition(0, () => vars.Tension == "bad"));
+            // SetDefaultTitle only accepts a tag base, so the good/bad variation is
+            // carried by two separate tags rather than a conditional format.
+            globalData.ActiveHub.SetDefaultTitle(vars.Tension == "bad" ? "TensionBad" : "TensionGood");
         }
         globalData.ActiveHub.SetSubtitle(globalData.Years);
 

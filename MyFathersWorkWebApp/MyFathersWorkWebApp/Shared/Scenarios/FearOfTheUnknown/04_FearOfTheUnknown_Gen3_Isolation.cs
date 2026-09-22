@@ -242,7 +242,7 @@ public static partial class FearOfTheUnknown
         globalData.SaveToUndo();
         FearOfTheUnknownVars vars = globalData.FearOfTheUnknownVars;
         vars.IsoOff = 1;
-        vars.TempCreep = Random.Shared.Next(2);
+        vars.TempCreep = Random.Shared.Next(2).ToString();
         string dateStr = GetDate1a(globalData);
 
         globalData.ActiveWindow = new GameplayWindow(globalData);
@@ -263,7 +263,7 @@ public static partial class FearOfTheUnknown
             PopUpIcon.Creepy_Icon,
             PopUpButton.Accept,
             Isolation,
-            str => str.FormatWithCondition(0, () => vars.TempCreep == 0));
+            str => str.FormatWithCondition(0, () => vars.TempCreep == "0"));
     }
 
     // =========================================================================

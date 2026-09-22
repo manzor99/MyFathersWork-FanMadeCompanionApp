@@ -1227,7 +1227,7 @@ public static partial class FearOfTheUnknown
         ShowPaymentReveal(globalData, 3, Payment2ThanksD, Payment2NoD);
     }
 
-    private static void ShowPaymentThanks(GlobalData globalData, int playerIdx, Action<GlobalData> next)
+    private static void ShowPayment2Thanks(GlobalData globalData, int playerIdx, Action<GlobalData> next)
     {
         FearOfTheUnknownVars vars = globalData.FearOfTheUnknownVars;
         string playerName = vars.GetPlayerName(globalData, playerIdx);
@@ -1240,7 +1240,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddClickHereToContinue(next);
     }
 
-    private static void ShowPaymentRefusal(GlobalData globalData, int playerIdx, Action<GlobalData> next)
+    private static void ShowPayment2Refusal(GlobalData globalData, int playerIdx, Action<GlobalData> next)
     {
         FearOfTheUnknownVars vars = globalData.FearOfTheUnknownVars;
         string playerName = vars.GetPlayerName(globalData, playerIdx);
@@ -1282,7 +1282,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2ThanksA(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentThanks(globalData, 0, Payment2ThanksA_Setup);
+        ShowPayment2Thanks(globalData, 0, Payment2ThanksA_Setup);
     }
 
     private static void Payment2ThanksA_Setup(GlobalData globalData)
@@ -1293,7 +1293,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2NoA(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentRefusal(globalData, 0, Payment2NoA_Setup);
+        ShowPayment2Refusal(globalData, 0, Payment2NoA_Setup);
     }
 
     private static void Payment2NoA_Setup(GlobalData globalData)
@@ -1304,7 +1304,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2ThanksB(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentThanks(globalData, 1, Payment2ThanksB_Setup);
+        ShowPayment2Thanks(globalData, 1, Payment2ThanksB_Setup);
     }
 
     private static void Payment2ThanksB_Setup(GlobalData globalData)
@@ -1315,7 +1315,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2NoB(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentRefusal(globalData, 1, Payment2NoB_Setup);
+        ShowPayment2Refusal(globalData, 1, Payment2NoB_Setup);
     }
 
     private static void Payment2NoB_Setup(GlobalData globalData)
@@ -1326,7 +1326,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2ThanksC(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentThanks(globalData, 2, Payment2ThanksC_Setup);
+        ShowPayment2Thanks(globalData, 2, Payment2ThanksC_Setup);
     }
 
     private static void Payment2ThanksC_Setup(GlobalData globalData)
@@ -1337,7 +1337,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2NoC(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentRefusal(globalData, 2, Payment2NoC_Setup);
+        ShowPayment2Refusal(globalData, 2, Payment2NoC_Setup);
     }
 
     private static void Payment2NoC_Setup(GlobalData globalData)
@@ -1348,7 +1348,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2ThanksD(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentThanks(globalData, 3, Payment2ThanksD_Setup);
+        ShowPayment2Thanks(globalData, 3, Payment2ThanksD_Setup);
     }
 
     private static void Payment2ThanksD_Setup(GlobalData globalData)
@@ -1359,7 +1359,7 @@ public static partial class FearOfTheUnknown
     internal static void Payment2NoD(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        ShowPaymentRefusal(globalData, 3, Payment2NoD_Setup);
+        ShowPayment2Refusal(globalData, 3, Payment2NoD_Setup);
     }
 
     private static void Payment2NoD_Setup(GlobalData globalData)
