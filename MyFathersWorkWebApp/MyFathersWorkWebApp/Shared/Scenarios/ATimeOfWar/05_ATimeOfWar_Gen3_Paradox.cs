@@ -735,20 +735,19 @@ public static partial class ATimeOfWar
         globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent();
 
+        // One <link=N> marker per possible giant count (0..PlayersNum) in the localized string.
+        List<Action<GlobalData>?> giantCallbacks = new();
         for (int count = 0; count <= globalData.PlayersNum; count++)
         {
             int capturedCount = count;
-            string label = capturedCount.ToString();
-            globalData.ActiveWindow.AddElement(
-                string.Empty,
-                gd =>
-                {
-                    gd.ATimeOfWarVars.Giants = capturedCount;
-                    ParadoxEvent(gd);
-                },
-                true,
-                _ => label);
+            giantCallbacks.Add(gd =>
+            {
+                gd.ATimeOfWarVars.Giants = capturedCount;
+                ParadoxEvent(gd);
+            });
         }
+
+        globalData.ActiveWindow.AddNextContentWithLinks(1, giantCallbacks, true);
     }
 
     internal static void ParadoxEvent(GlobalData globalData)

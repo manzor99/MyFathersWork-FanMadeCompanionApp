@@ -223,33 +223,29 @@ public static partial class ATimeOfWar
         if (globalData.Years == Years.Late)
         {
             GameplayHubSection finalSec = globalData.ActiveHub.AddSection("FinalConflict", true);
-            finalSec.AddSpecialClickHere("FinalConflict", () => HowtoWar(globalData));
+            finalSec.AddSpecialClickHere("FinalConflict", HowtoWar);
             finalSec.AddDefaultContent("FinalConflict", text => text
                 .FormatWithCondition(0, () => vars.Peac == 1));
         }
 
-        GameplayHubSection endRoundSec = globalData.ActiveHub.AddSection(GlobalTags.Hub_EndRound, false);
-        endRoundSec.AddDefaultClickHere(GlobalTags.Hub_EndRound, () =>
-        {
-            globalData.ActiveHub.ShowEndOfRoundPopUp(() => Peace_EndRound(globalData));
-        });
+        const string       endSection     = "End";
+        GameplayHubSection endEarlyMiddle = globalData.ActiveHub.AddSection(endSection);
+        endEarlyMiddle.ReplaceShouldShow(() => globalData.Years is Years.Early or Years.Middle);
+        endEarlyMiddle.AddDefaultContent(endSection);
+        endEarlyMiddle.AddClickHereContinueNextRound(Peace_EndRound, true);
+
+        globalData.ActiveHub.AddEndOfGenerationSection(Peace_EndRound);
     }
 
     private static void Peace_EndRound(GlobalData globalData)
     {
-        globalData.SaveToUndo();
-        if (globalData.Years == Years.Early)
+        globalData.ShowEndOfRoundPopUp(globalData.Years switch
         {
-            ATOW_FamineEvent(globalData);
-        }
-        else if (globalData.Years == Years.Middle)
-        {
-            PeaceEvent(globalData);
-        }
-        else
-        {
-            FinalBattleTime(globalData);
-        }
+            Years.Early  => ATOW_FamineEvent,
+            Years.Middle => PeaceEvent,
+            Years.Late   => FinalBattleTime,
+            _            => _ => { }
+        });
     }
 
     private static void ATOW_FamineEvent(GlobalData globalData)

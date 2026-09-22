@@ -154,7 +154,7 @@ public class ATimeOfWarVars
     public int          RandomPlayer      { get; set; }
     public int[]        PlayerScores      { get; set; } = new int[5];
     public int          ScoreEntryIndex   { get; set; }
-    public List<PlayerId> TiedPlayers     { get; set; } = new();
+    public List<int> TiedPlayers     { get; set; } = new();
     public int[]        TieBreakerMoney   { get; set; } = new int[5];
     public int          TieBreakerIndex   { get; set; }
     public string       WinnerName        { get; set; } = string.Empty;
@@ -338,7 +338,7 @@ public class ATimeOfWarVars
 
         PlayerScores    = new int[5];
         ScoreEntryIndex = 0;
-        TiedPlayers     = new List<PlayerId>();
+        TiedPlayers     = new List<int>();
         TieBreakerMoney = new int[5];
         TieBreakerIndex = 0;
         WinnerName      = string.Empty;

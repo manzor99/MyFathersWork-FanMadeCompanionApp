@@ -9,9 +9,9 @@ public static partial class ATimeOfWar
 
         globalData.ActivePopup = new GameplayPopup(
             globalData,
-            PopUpTitle.Storybook,
+            PopUpTitle.Setup,
             PopUpIcon.Caretaker,
-            PopUpButton.ReturnToScenario,
+            PopUpButton.Accept,
             _ => { },
             "ATOW_UniGen3_Content",
             text => text.FormatWithCondition(0, () => globalData.ATimeOfWarVars.Round is 10 or 11 or 12));
@@ -23,9 +23,9 @@ public static partial class ATimeOfWar
 
         globalData.ActivePopup = new GameplayPopup(
             globalData,
-            PopUpTitle.Storybook,
+            PopUpTitle.Setup,
             PopUpIcon.LoseCreepy,
-            PopUpButton.ReturnToScenario,
+            PopUpButton.Accept,
             _ => { },
             "ATOW_Church_Content");
     }
@@ -33,16 +33,14 @@ public static partial class ATimeOfWar
     public static void Scoring(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActiveHub             = null;
-        globalData.ATimeOfWarVars.HubId  = TimeOfWarHubId.None;
-        globalData.ActiveWindow          = new GameplayWindow(globalData, "ATOW_Scoring_Title");
+        globalData.ActiveHub            = null;
+        globalData.ATimeOfWarVars.HubId = TimeOfWarHubId.None;
 
-        globalData.ActiveWindow.AddText(
-            "ATOW_Scoring_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text.FormatWithCondition(0, () => globalData.ATimeOfWarVars.TmMasterwork == "yes"));
-
-        globalData.ActiveWindow.AddElement("ATOW_Scoring_Continue", StartScoreEntry, true);
+        globalData.ActiveWindow.AddClickHereToContinue(StartScoreEntry);
     }
 
     private static void StartScoreEntry(GlobalData globalData)
@@ -64,25 +62,18 @@ public static partial class ATimeOfWar
 
         globalData.ActiveInputPopup = new GameplayInputPopup(
             globalData,
-            PopUpIcon.ScoreTrackMarker,
-            "ATOW_PlayerScoreName_Content",
-            "ATOW_PlayerScoreName_Placeholder",
-            PopUpButton.Submit,
-            input =>
+            "0",
+            PopUpButton.Confirm,
+            value => int.TryParse(value, out int score) && score is >= -100 and <= 999,
+            value =>
             {
-                if (!int.TryParse(input.Trim(), out int score)) score = 0;
-                vars.PlayerScores[vars.ScoreEntryIndex] = score;
+                vars.PlayerScores[vars.ScoreEntryIndex] = int.Parse(value);
                 vars.ScoreEntryIndex++;
 
-                if (vars.ScoreEntryIndex < globalData.PlayersNum)
-                {
-                    PlayerScoreName(globalData);
-                }
-                else
-                {
-                    EvaluateWinner(globalData);
-                }
+                if (vars.ScoreEntryIndex < globalData.PlayersNum) PlayerScoreName(globalData);
+                else EvaluateWinner(globalData);
             },
+            false,
             text => text.FormatWithReplacement(0, playerName));
     }
 
@@ -98,15 +89,12 @@ public static partial class ATimeOfWar
         vars.TiedPlayers.Clear();
         for (int i = 0; i < globalData.PlayersNum; i++)
         {
-            if (vars.PlayerScores[i] == maxScore)
-            {
-                vars.TiedPlayers.Add((PlayerId)i);
-            }
+            if (vars.PlayerScores[i] == maxScore) vars.TiedPlayers.Add(i);
         }
 
         if (vars.TiedPlayers.Count == 1)
         {
-            vars.WinnerName = vars.GetDisplayPlayerName(globalData, (int)vars.TiedPlayers[0]);
+            vars.WinnerName = vars.GetDisplayPlayerName(globalData, vars.TiedPlayers[0]);
             WinnerHUB(globalData);
         }
         else
@@ -120,25 +108,23 @@ public static partial class ATimeOfWar
         globalData.SaveToUndo();
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_WinnerHUBproblem_Title");
-        globalData.ActiveWindow.AddText("ATOW_WinnerHUBproblem_Text");
+        // Only the tied players are offered as options; everyone else is filtered out.
+        HashSet<string> tiedNames = vars.TiedPlayers
+            .Select(pid => globalData.GetPlayerNameByIndex(pid))
+            .ToHashSet();
 
-        foreach (PlayerId pid in vars.TiedPlayers)
-        {
-            PlayerId captured = pid;
-            string pName = vars.GetDisplayPlayerName(globalData, (int)captured);
-            globalData.ActiveWindow.AddElement(
-                string.Empty,
-                gd =>
-                {
-                    gd.ATimeOfWarVars.WinnerName = pName;
-                    WinnerHUB(gd);
-                },
-                true,
-                _ => pName);
-        }
-
-        globalData.ActiveWindow.AddElement("ATOW_WinnerHUBproblem_MultipleOrNone", StartMoneyTieBreaker, true);
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent();
+        globalData.ActiveWindow.AddAllPlayersNamesAsOptions(
+            name =>
+            {
+                globalData.ATimeOfWarVars.WinnerName = name;
+                WinnerHUB(globalData);
+            },
+            PlayerFormatterTag.None,
+            tiedNames.Contains);
+        globalData.ActiveWindow.AddNextContent(1, true, null, StartMoneyTieBreaker);
     }
 
     private static void StartMoneyTieBreaker(GlobalData globalData)
@@ -156,30 +142,23 @@ public static partial class ATimeOfWar
     {
         globalData.SaveToUndo();
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
-        PlayerId currentPid = vars.TiedPlayers[vars.TieBreakerIndex];
-        string playerName = vars.GetDisplayPlayerName(globalData, (int)currentPid);
+        int    currentPid = vars.TiedPlayers[vars.TieBreakerIndex];
+        string playerName = vars.GetDisplayPlayerName(globalData, currentPid);
 
         globalData.ActiveInputPopup = new GameplayInputPopup(
             globalData,
-            PopUpIcon.Money_Icon,
-            "ATOW_TieBreakerMoney_Content",
-            "ATOW_PlayerScoreName_Placeholder",
-            PopUpButton.Submit,
-            input =>
+            "0",
+            PopUpButton.Confirm,
+            value => int.TryParse(value, out int money) && money is >= 0 and <= 999,
+            value =>
             {
-                if (!int.TryParse(input.Trim(), out int val)) val = 0;
-                vars.TieBreakerMoney[(int)currentPid] = val;
+                vars.TieBreakerMoney[currentPid] = int.Parse(value);
                 vars.TieBreakerIndex++;
 
-                if (vars.TieBreakerIndex < vars.TiedPlayers.Count)
-                {
-                    PromptNextTieBreakerMoney(globalData);
-                }
-                else
-                {
-                    ResolveMoneyTieBreaker(globalData);
-                }
+                if (vars.TieBreakerIndex < vars.TiedPlayers.Count) PromptNextTieBreakerMoney(globalData);
+                else ResolveMoneyTieBreaker(globalData);
             },
+            false,
             text => text.FormatWithReplacement(0, playerName));
     }
 
@@ -187,20 +166,17 @@ public static partial class ATimeOfWar
     {
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
         int maxMoney = int.MinValue;
-        foreach (PlayerId pid in vars.TiedPlayers)
+        foreach (int pid in vars.TiedPlayers)
         {
-            if (vars.TieBreakerMoney[(int)pid] > maxMoney)
-            {
-                maxMoney = vars.TieBreakerMoney[(int)pid];
-            }
+            if (vars.TieBreakerMoney[pid] > maxMoney) maxMoney = vars.TieBreakerMoney[pid];
         }
 
-        List<PlayerId> stillTied = vars.TiedPlayers
-            .Where(pid => vars.TieBreakerMoney[(int)pid] == maxMoney)
+        List<int> stillTied = vars.TiedPlayers
+            .Where(pid => vars.TieBreakerMoney[pid] == maxMoney)
             .ToList();
 
-        PlayerId chosen = stillTied[Random.Shared.Next(stillTied.Count)];
-        vars.WinnerName = vars.GetDisplayPlayerName(globalData, (int)chosen);
+        int chosen = stillTied[Random.Shared.Next(stillTied.Count)];
+        vars.WinnerName = vars.GetDisplayPlayerName(globalData, chosen);
         WinnerHUB(globalData);
     }
 
@@ -209,12 +185,10 @@ public static partial class ATimeOfWar
         globalData.SaveToUndo();
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_WinnerHUB_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_WinnerHUB_Text",
-            false,
-            text => text.FormatWithReplacement(0, vars.WinnerName));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, ShowEnding, true);
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(text => text.FormatWithReplacement(0, vars.WinnerName));
+        globalData.ActiveWindow.AddClickHereToContinue(ShowEnding);
     }
 
     public static void ShowEnding(GlobalData globalData)
@@ -272,23 +246,23 @@ public static partial class ATimeOfWar
         };
         string giantThing = giantThings[Random.Shared.Next(giantThings.Length)];
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End1_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End1_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text
                 .FormatWithReplacement(0, vars.WinnerName)
                 .FormatWithReplacement(2, giantThing)
                 .FormatWithCondition(1, () => vars.Release >= 1));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow2(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End2_Title");
-        globalData.ActiveWindow.AddText("ATOW_End2_Text");
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent();
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow3(GlobalData globalData)
@@ -297,14 +271,13 @@ public static partial class ATimeOfWar
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
         if (string.IsNullOrEmpty(vars.WinnerName)) vars.WinnerName = vars.GetDisplayPlayerName(globalData, 0);
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End3_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End3_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text
                 .FormatWithReplacement(0, globalData.TownName)
                 .FormatWithReplacement(1, vars.WinnerName));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow4(GlobalData globalData)
@@ -312,12 +285,11 @@ public static partial class ATimeOfWar
         globalData.SaveToUndo();
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End4_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End4_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text.FormatWithReplacement(0, vars.WarWinner));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow5(GlobalData globalData)
@@ -333,10 +305,9 @@ public static partial class ATimeOfWar
             ? (vars.WarDestroy > 0 ? 0 : 1)
             : 2;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End5_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End5_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text
                 .FormatWithReplacement(2, globalData.TownName)
                 .FormatWithReplacement(4, vars.WinnerName)
@@ -344,7 +315,7 @@ public static partial class ATimeOfWar
                 .FormatWithCondition(1, () => vars.EndChange == "yes")
                 .FormatWithIndex(2, persuadeVariant)
                 .FormatWithCondition(3, () => vars.Benevolent == "good"));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow6(GlobalData globalData)
@@ -353,12 +324,11 @@ public static partial class ATimeOfWar
         ATimeOfWarVars vars = globalData.ATimeOfWarVars;
         if (string.IsNullOrEmpty(vars.WinnerName)) vars.WinnerName = vars.GetDisplayPlayerName(globalData, 0);
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End6_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End6_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text.FormatWithReplacement(0, vars.WinnerName));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow7(GlobalData globalData)
@@ -382,16 +352,15 @@ public static partial class ATimeOfWar
         string invention = inventions[Random.Shared.Next(inventions.Length)];
         string meatName = string.IsNullOrEmpty(vars.NewMeat) ? "Soylent Ration" : vars.NewMeat;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End7_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End7_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text
                 .FormatWithReplacement(0, globalData.TownName)
                 .FormatWithReplacement(1, vars.WinnerName)
                 .FormatWithReplacement(2, meatName)
                 .FormatWithReplacement(3, invention));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     public static void EndAtow8(GlobalData globalData)
@@ -404,22 +373,22 @@ public static partial class ATimeOfWar
             ? (vars.Peac == 2 ? 0 : 1)
             : 2;
 
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_End8_Title");
-        globalData.ActiveWindow.AddText(
-            "ATOW_End8_Text",
-            false,
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent(
             text => text
                 .FormatWithReplacement(0, vars.WinnerName)
                 .FormatWithIndex(1, peaceVariant));
-        globalData.ActiveWindow.AddElement(GlobalTags.Gameplay_ClickToContinue, FinalCredits, true);
+        globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 
     private static void FinalCredits(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActiveWindow = new GameplayWindow(globalData, "ATOW_FinalCredits_Title");
-        globalData.ActiveWindow.AddText("ATOW_FinalCredits_Text");
-        globalData.ActiveWindow.AddElement("ATOW_ReturnToMainMenu", ReturnToMainMenu, true);
+        globalData.ActiveWindow = new GameplayWindow(globalData);
+        globalData.ActiveWindow.AddDefaultTitle();
+        globalData.ActiveWindow.AddDefaultContent();
+        globalData.ActiveWindow.AddNextContent(1, true, null, ReturnToMainMenu);
     }
 
     private static void ReturnToMainMenu(GlobalData globalData)
