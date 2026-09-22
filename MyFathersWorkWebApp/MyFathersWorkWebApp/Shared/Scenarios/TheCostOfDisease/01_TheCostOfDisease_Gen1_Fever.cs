@@ -1,4 +1,4 @@
-﻿namespace MyFathersWorkWebApp;
+namespace MyFathersWorkWebApp;
 
 public static partial class TheCostOfDisease
 {
@@ -10,7 +10,7 @@ public static partial class TheCostOfDisease
         globalData.TheCostOfDiseaseVars.HubId = CostOfDiseaseHubId.Fever;
         globalData.ActiveHub                  = new GameplayHub(globalData);
         globalData.ActiveHub.SetDefaultTitle();
-        globalData.ActiveHub.SetSubtitle(Years.Early);
+        globalData.ActiveHub.SetSubtitle(globalData.Years);
 
         const string       hospitalSection = "Hospital";
         GameplayHubSection hospital        = globalData.ActiveHub.AddSection(hospitalSection, true);

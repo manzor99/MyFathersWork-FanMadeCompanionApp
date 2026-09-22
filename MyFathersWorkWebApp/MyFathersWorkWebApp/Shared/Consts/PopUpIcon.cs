@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 namespace MyFathersWorkWebApp;
 
 public static class PopUpIcon
@@ -36,4 +36,14 @@ public static class PopUpIcon
     public const string ExperimentBBack            = "ExperimentBBack";
     public const string S1_HunterToken             = "S1_HunterToken";
     public const string S1_WolfToken               = "S1_WolfToken";
+    public const string S1_VialToken               = "S1_VialToken";
+    public const string S1_MWUpdateLycanthropic    = "S1_MWUpdateLycanthropic";
+    public const string S1_Heart                   = "S1_HeartToken";
+    public const string CompulsionBack             = "CompulsionBack";
+    public const string Spouse_Servant             = "Spouse_Servant";
+    public const string Servant                    = "Servant";
+    public const string LoseServant_Icon           = "LoseServant_Icon";
+    public const string GainBody_Icon              = "GainBody_Icon";
+    public const string ValidationToken            = "ValidationToken";
+    public const string GainExperiment_Icon        = "GainExperiment_Icon";
 }
