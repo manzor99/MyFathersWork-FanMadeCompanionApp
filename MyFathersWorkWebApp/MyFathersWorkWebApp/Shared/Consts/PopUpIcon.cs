@@ -75,4 +75,7 @@ public static class PopUpIcon
     public const string S3_WoodenFigureToken       = "S3_WoodenFigureToken";
     public const string S3_WorldConquest           = "S3_WorldConquest";
     public const string SearchDeck_Icon            = "SearchDeck_Icon";
+    public const string ChooseFromSupply_Icon      = "AnyKnowledge_Icon";
+    public const string DiscardExperiment_Icon     = "ExperimentABack";
+    public const string None                       = "MFWlogo";
 }

@@ -151,12 +151,18 @@ public class ATimeOfWarVars
     public string PageTurn   { get; set; } = "no";
 
     // Final Scoring & Tie-Breakers
+    public int          RandomPlayer      { get; set; }
     public int[]        PlayerScores      { get; set; } = new int[5];
     public int          ScoreEntryIndex   { get; set; }
     public List<PlayerId> TiedPlayers     { get; set; } = new();
     public int[]        TieBreakerMoney   { get; set; } = new int[5];
     public int          TieBreakerIndex   { get; set; }
     public string       WinnerName        { get; set; } = string.Empty;
+
+    public string GetPlayerName(GlobalData globalData, int index)
+    {
+        return GetDisplayPlayerName(globalData, index);
+    }
 
     public string GetDisplayPlayerName(GlobalData globalData, int index)
     {
