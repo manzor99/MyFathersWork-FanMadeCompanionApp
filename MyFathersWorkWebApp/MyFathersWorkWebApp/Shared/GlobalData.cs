@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -283,10 +283,14 @@ public class GlobalData
         {
             return TheCostOfDiseaseVars.HubId switch
             {
-                CostOfDiseaseHubId.Fever       => TheCostOfDisease.Fever,
-                CostOfDiseaseHubId.Devastation => TheCostOfDisease.Devastation,
-                CostOfDiseaseHubId.Hospital    => TheCostOfDisease.Hospital,
-                _                              => null
+                CostOfDiseaseHubId.Fever        => TheCostOfDisease.Fever,
+                CostOfDiseaseHubId.Devastation  => TheCostOfDisease.Devastation,
+                CostOfDiseaseHubId.Hospital     => TheCostOfDisease.Hospital,
+                CostOfDiseaseHubId.GloomyGothic => TheCostOfDisease.GloomyGothic,
+                CostOfDiseaseHubId.Prosperity   => TheCostOfDisease.Prosperity,
+                CostOfDiseaseHubId.NoUniversity => TheCostOfDisease.NoUniversity,
+                CostOfDiseaseHubId.University   => TheCostOfDisease.University,
+                _                               => null
             };
         }
 
