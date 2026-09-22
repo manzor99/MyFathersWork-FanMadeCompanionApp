@@ -56,6 +56,7 @@
         
         GlobalData.TheCostOfDiseaseVars.Reset(GlobalData);
         GlobalData.ATimeOfWarVars.Reset(GlobalData);
+        GlobalData.FearOfTheUnknownVars.Reset(GlobalData);
 
         switch (GlobalData.ScenarioId)
         {
@@ -67,6 +68,11 @@
             case ScenarioId.TimeOfWar:
             {
                 ATimeOfWar.Init(GlobalData);
+                break;
+            }
+            case ScenarioId.FearOfUnknown:
+            {
+                FearOfTheUnknown.Init(GlobalData);
                 break;
             }
             default:

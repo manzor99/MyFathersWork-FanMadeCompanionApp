@@ -106,6 +106,17 @@ public class GlobalData
                 });
                 break;
             }
+            case ScenarioId.FearOfUnknown:
+            {
+                MethodInfo         method = typeof(FearOfTheUnknown).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
+                Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
+                UndoStack.Push(new UndoData
+                {
+                    Callback = action,
+                    JsonData = JsonConvert.SerializeObject(this)
+                });
+                break;
+            }
         }
     }
 
@@ -229,6 +240,7 @@ public class GlobalData
 
         TheCostOfDiseaseVars.Reset(this);
         ATimeOfWarVars.Reset(this);
+        FearOfTheUnknownVars.Reset(this);
         ActiveHub        = null;
         ActiveWindow     = null;
         ActivePopup      = null;
@@ -272,6 +284,7 @@ public class GlobalData
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Localization.csv",
             ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Localization.csv",
+            ScenarioId.FearOfUnknown => "localization/FearOfTheUnknown_Localization.csv",
             _                        => string.Empty
         };
 
@@ -279,6 +292,7 @@ public class GlobalData
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Gameplay_Localization.csv",
             ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Gameplay_Localization.csv",
+            ScenarioId.FearOfUnknown => "localization/FearOfTheUnknown_Gameplay_Localization.csv",
             _                        => string.Empty
         };
 
@@ -324,6 +338,21 @@ public class GlobalData
                 TimeOfWarHubId.MonarchReign => ATimeOfWar.MonarchReign,
                 TimeOfWarHubId.Peace        => ATimeOfWar.Peace,
                 _                           => null
+            };
+        }
+
+        if (ScenarioId == ScenarioId.FearOfUnknown)
+        {
+            return FearOfTheUnknownVars.HubId switch
+            {
+                FearOfUnknownHubId.Mania      => FearOfTheUnknown.Mania,
+                FearOfUnknownHubId.Foreign    => FearOfTheUnknown.Foreign,
+                FearOfUnknownHubId.Creature   => FearOfTheUnknown.Creature,
+                FearOfUnknownHubId.Isolation  => FearOfTheUnknown.Isolation,
+                FearOfUnknownHubId.Tension    => FearOfTheUnknown.Tension,
+                FearOfUnknownHubId.Privatized => FearOfTheUnknown.Privatized,
+                FearOfUnknownHubId.Liberal    => FearOfTheUnknown.Liberal,
+                _                             => null
             };
         }
 
