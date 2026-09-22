@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -29,9 +29,12 @@ public class GlobalData
     public string                     PlayerCName          { get; set; } = string.Empty;
     public string                     PlayerDName          { get; set; } = string.Empty;
     public string                     TownName             { get; set; } = string.Empty;
+    [JsonIgnore] public string        CityName             => TownName;
+    [JsonIgnore] public string[]      PlayersName          => [PlayerAName, PlayerBName, PlayerCName, PlayerDName, string.Empty];
     public Years                      Years                { get; set; } = Years.Early;
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();
+    public ATimeOfWarVars             ATimeOfWarVars       { get; }      = new();
     public Dictionary<string, object> TmpValues            { get; }      = new();
 
     [JsonIgnore] public GameplayHub?        ActiveHub        { get; set; }
@@ -48,6 +51,7 @@ public class GlobalData
     public GlobalData()
     {
         TheCostOfDiseaseVars.Reset(this);
+        ATimeOfWarVars.Reset(this);
     }
 
     public string GetLocalizedUITag(string tag)
@@ -83,6 +87,17 @@ public class GlobalData
             case ScenarioId.CostOfDisease:
             {
                 MethodInfo         method = typeof(TheCostOfDisease).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
+                Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
+                UndoStack.Push(new UndoData
+                {
+                    Callback = action,
+                    JsonData = JsonConvert.SerializeObject(this)
+                });
+                break;
+            }
+            case ScenarioId.TimeOfWar:
+            {
+                MethodInfo         method = typeof(ATimeOfWar).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
                 Action<GlobalData> action = (Action<GlobalData>)Delegate.CreateDelegate(typeof(Action<GlobalData>), method);
                 UndoStack.Push(new UndoData
                 {
@@ -213,6 +228,7 @@ public class GlobalData
         }
 
         TheCostOfDiseaseVars.Reset(this);
+        ATimeOfWarVars.Reset(this);
         ActiveHub        = null;
         ActiveWindow     = null;
         ActivePopup      = null;
@@ -255,12 +271,14 @@ public class GlobalData
         string scenarioLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Localization.csv",
+            ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Localization.csv",
             _                        => string.Empty
         };
 
         string scenarioGameplayLocalization = ScenarioId switch
         {
             ScenarioId.CostOfDisease => "localization/TheCostOfDisease_Gameplay_Localization.csv",
+            ScenarioId.TimeOfWar     => "localization/ATimeOfWar_Gameplay_Localization.csv",
             _                        => string.Empty
         };
 
@@ -287,6 +305,21 @@ public class GlobalData
                 CostOfDiseaseHubId.Devastation => TheCostOfDisease.Devastation,
                 CostOfDiseaseHubId.Hospital    => TheCostOfDisease.Hospital,
                 _                              => null
+            };
+        }
+
+        if (ScenarioId == ScenarioId.TimeOfWar)
+        {
+            return ATimeOfWarVars.HubId switch
+            {
+                TimeOfWarHubId.TakeSides    => ATimeOfWar.TakeSides,
+                TimeOfWarHubId.TimeTravel   => ATimeOfWar.TimeTravel,
+                TimeOfWarHubId.Martial      => ATimeOfWar.Martial,
+                TimeOfWarHubId.Warning      => ATimeOfWar.Warning,
+                TimeOfWarHubId.Paradox      => ATimeOfWar.Paradox,
+                TimeOfWarHubId.MonarchReign => ATimeOfWar.MonarchReign,
+                TimeOfWarHubId.Peace        => ATimeOfWar.Peace,
+                _                           => null
             };
         }
 
