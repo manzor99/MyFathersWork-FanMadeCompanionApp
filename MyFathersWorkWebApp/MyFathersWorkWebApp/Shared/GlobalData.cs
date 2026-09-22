@@ -32,6 +32,7 @@ public class GlobalData
     public Years                      Years                { get; set; } = Years.Early;
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();
+    public ATimeOfWarVars             ATimeOfWarVars       { get; }      = new();
     public Dictionary<string, object> TmpValues            { get; }      = new();
 
     [JsonIgnore] public GameplayHub?        ActiveHub        { get; set; }
@@ -48,6 +49,7 @@ public class GlobalData
     public GlobalData()
     {
         TheCostOfDiseaseVars.Reset(this);
+        ATimeOfWarVars.Reset(this);
     }
 
     public string GetLocalizedUITag(string tag)
