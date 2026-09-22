@@ -64,16 +64,6 @@ Martial2_BuildingDestroyedSetup_Content;One of the buildings in town was targete
 ResistEnd2_Content1;<link=0>The {{0=...|Unified Monarchists|Separatists|...}}</link><br /><br /><link=1>The {{1=...|Separatists|Unified Monarchists|...}}</link>
 ResistEnd3_Content1;<link=0>Click here if the {{0=...|Separatists|Unified Monarchists|...}} were successful</link><br /><br /><link=1>Click here if the {{1=...|Unified Monarchists|Separatists|...}} defended the attack and won the war.</link>
 Martial_EndOfGen_Content;Remove all player pieces from the board and perform the End of the Generation. Players keep all <icon=S3_WeaponToken> tokens they acquired.
-ATimeOfWar_Warning_Title;<index0>A Dire Warning:The Timeline Shifts</index0>
-ATimeOfWar_Warning1_Title;A Dire Warning
-ATimeOfWar_Warning2_Title;The Timeline Shifts
-ATimeOfWar_Paradox_Title;A Time Paradox
-ATimeOfWar_OldManToken_Choice_Separatists;The Separatists
-ATimeOfWar_OldManToken_Choice_Monarchists;The Unified Monarchists
-ATimeOfWar_MonuVote_Choice_Loyal;Remain loyal and build the Monument as designed
-ATimeOfWar_MonuVote_Choice_Sabotage;Secretly install the Time Machine device
-ATimeOfWar_ParadoxRandoEvent_Button;Witness the effects of the Time Paradox
-ATimeOfWar_ParadoxGiantCheck_Prompt;How many players completed their Giant Masterwork?
 Reign1b_Placeholder;Enter noble title...
 Reign2b_Placeholder;Enter noble title...
 Reign3b_Placeholder;Enter noble title...

@@ -75,7 +75,7 @@ ThirtyFiveVp_0_Title;Planned Destruction
 ThirtyFiveVp_0_Content;From the letters and journal entries of the young entrepreneurs, we can see a deeply seated rivalry between them, spurred onward by feelings of inadequacy, solitude, and betrayal. Nothing was more insidious than the moments when they actively sabotaged the work of others for their own benefit.<br />
 Gen1InsanityYes2_Title;Absent Parent
 Gen1InsanityYes2_0_Content;An investment in a summer home may have calmed their parent's nerves during times of stress, but it also meant time away from the Estate. These increasingly frequent visits to rekindle sanity meant {{0=...|Oliver|James|Olivia|...}} II's childhood guidance came more from the servants around the home than from their parental figures. This left an unfortunate void in their psychological development, one that affected their actions for the remainder of their life.
-// ---Hub---;
+// ---Hospital Hub---;
 Hospital_Title;Thriving in Adversity
 Hospital_Board_Title;<icon=Storybook><b> Board of Trustees</b>
 Hospital_Board_Content;Due to the efforts of your family, the Hospital has graciously awarded you with a seat on the Hospital's board of trustees.
@@ -197,7 +197,7 @@ LetterCode_Title;Surprising Correspondence
 LetterCode_Content;As the welcome from the townspeople was considerably icy, the cousins were amused to receive a plain letter of correspondence sealed with wax. No return address was provided and no watermarks offered evidence as to their origin. Perhaps this mystery, they surmised, would afford them more than simple seclusion in this dreary countryside.<br /><br />Little did they realize how instrumental this stealthful exchange would prove over the next several decades.<br />
 Gen1InsanityYes_Title;Absent Parent
 Gen1InsanityYes_0_Content;An investment in a summer home meant time away from the estate, and these increasingly frequent visits to rekindle sanity meant {{0=...|Oliver|James|Olivia|...}} II's childhood guidance came more from the servants around the home than from their parental figures. This left an unfortunate void in their psychological development, one that affected their actions for the remainder of their life.
-// ---Hub---;
+// ---Devastation Hub---;
 Devastation_Title;Devastation
 Devastation_Envelopes_Title;<icon=StorybookToken><b> Clandestine Meetings</b>
 Devastation_HereditaryDisease_Title;<icon=StorybookToken><b> Relief from Disease</b>
