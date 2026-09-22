@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -29,6 +29,8 @@ public class GlobalData
     public string                     PlayerCName          { get; set; } = string.Empty;
     public string                     PlayerDName          { get; set; } = string.Empty;
     public string                     TownName             { get; set; } = string.Empty;
+    [JsonIgnore] public string        CityName             => TownName;
+    [JsonIgnore] public string[]      PlayersName          => [PlayerAName, PlayerBName, PlayerCName, PlayerDName, string.Empty];
     public Years                      Years                { get; set; } = Years.Early;
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();
@@ -283,10 +285,14 @@ public class GlobalData
         {
             return TheCostOfDiseaseVars.HubId switch
             {
-                CostOfDiseaseHubId.Fever       => TheCostOfDisease.Fever,
-                CostOfDiseaseHubId.Devastation => TheCostOfDisease.Devastation,
-                CostOfDiseaseHubId.Hospital    => TheCostOfDisease.Hospital,
-                _                              => null
+                CostOfDiseaseHubId.Fever        => TheCostOfDisease.Fever,
+                CostOfDiseaseHubId.Devastation  => TheCostOfDisease.Devastation,
+                CostOfDiseaseHubId.Hospital     => TheCostOfDisease.Hospital,
+                CostOfDiseaseHubId.GloomyGothic => TheCostOfDisease.GloomyGothic,
+                CostOfDiseaseHubId.Prosperity   => TheCostOfDisease.Prosperity,
+                CostOfDiseaseHubId.NoUniversity => TheCostOfDisease.NoUniversity,
+                CostOfDiseaseHubId.University   => TheCostOfDisease.University,
+                _                               => null
             };
         }
 
