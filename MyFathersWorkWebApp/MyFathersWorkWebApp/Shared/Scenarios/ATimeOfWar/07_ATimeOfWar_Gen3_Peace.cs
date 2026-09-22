@@ -152,7 +152,7 @@ public static partial class ATimeOfWar
         new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.None,
+            PopUpIcon.S3_WeaponToken,
             PopUpButton.Confirm,
             () => PeaceDiscard_1(globalData),
             text => text.FormatWithReplacement(0, vars.WeaponLimit.ToString())
@@ -426,7 +426,7 @@ public static partial class ATimeOfWar
         new GameplayPopup(
             globalData,
             PopUpTitle.SpecialSetup,
-            PopUpIcon.S3_WoodenFigureToken,
+            PopUpIcon.S3_WeaponToken,
             PopUpButton.Confirm,
             () => BattleTime(globalData)
         );
@@ -510,7 +510,7 @@ public static partial class ATimeOfWar
         new GameplayPopup(
             globalData,
             PopUpTitle.SpecialSetup,
-            PopUpIcon.None,
+            PopUpIcon.S3_ScenarioIcon,
             PopUpButton.Confirm,
             () => BattleTime(globalData)
         );

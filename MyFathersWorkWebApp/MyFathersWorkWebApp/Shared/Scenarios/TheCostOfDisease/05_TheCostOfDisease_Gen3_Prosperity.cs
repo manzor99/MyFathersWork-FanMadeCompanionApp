@@ -312,7 +312,7 @@ public static partial class TheCostOfDisease
     private static void WolvesBankMayorGood_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_MayorCoin, PopUpButton.Confirm, ResolveCharityWolves,
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_EstateUpgradeBACK, PopUpButton.Confirm, ResolveCharityWolves,
             content => content.FormatWithReplacement(0, globalData.TheCostOfDiseaseVars.Mayor));
     }
 
@@ -331,7 +331,7 @@ public static partial class TheCostOfDisease
     private static void ResolveCharityWolves_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_Heart, PopUpButton.Confirm, LycanMessageGood,
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_EstateUpgradeBACK, PopUpButton.Confirm, LycanMessageGood,
             content => content.FormatWithReplacement(0, globalData.TheCostOfDiseaseVars.Charity));
     }
 

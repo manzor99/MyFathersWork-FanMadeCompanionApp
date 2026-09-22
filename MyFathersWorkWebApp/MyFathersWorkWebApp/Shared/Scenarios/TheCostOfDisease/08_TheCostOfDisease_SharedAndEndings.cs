@@ -81,7 +81,7 @@ public static partial class TheCostOfDisease
     private static void DetEffect1_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.Insanity_Icon, PopUpButton.Confirm, DetEffectContinue);
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_Immortality, PopUpButton.Confirm, DetEffectContinue);
     }
 
     private static void DetEffect2(GlobalData globalData)
@@ -96,7 +96,7 @@ public static partial class TheCostOfDisease
     private static void DetEffect2_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.Creepy_Icon, PopUpButton.Confirm, DetEffectContinue);
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_Immortality, PopUpButton.Confirm, DetEffectContinue);
     }
 
     private static void DetEffect3(GlobalData globalData)
@@ -111,7 +111,7 @@ public static partial class TheCostOfDisease
     private static void DetEffect3_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.LoseServant_Icon, PopUpButton.Confirm, DetEffectContinue);
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_Immortality, PopUpButton.Confirm, DetEffectContinue);
     }
 
     private static void DetEffect4(GlobalData globalData)

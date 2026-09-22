@@ -281,7 +281,7 @@ public static partial class FearOfTheUnknown
         globalData.ActivePopup = new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.StorybookToken,
+            PopUpIcon.ScoreTrackMarker,
             PopUpButton.Accept,
             Mania,
             "FP10VPsignin_0_Content");
@@ -407,7 +407,7 @@ public static partial class FearOfTheUnknown
         globalData.ActivePopup = new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.StorybookToken,
+            PopUpIcon.ScoreTrackMarker,
             PopUpButton.Accept,
             Mania,
             "FP10VPsignin_0_Content");
@@ -470,7 +470,7 @@ public static partial class FearOfTheUnknown
         globalData.ActivePopup = new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.StorybookToken,
+            PopUpIcon.ScoreTrackMarker,
             PopUpButton.Accept,
             Mania,
             "FP10VPsignin_0_Content");
