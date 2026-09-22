@@ -134,7 +134,7 @@ public static partial class FearOfTheUnknown
                 "Setup",
                 str => str
                     .FormatWithReplacement(0, vars.Tracker.ToString())
-                    .FormatWithCondition(0, () => globalData.PlayersNum == 3));
+                    .FormatWithCondition(1, () => globalData.PlayersNum == 3));
 
             GameplayHubSection pricesSec = globalData.ActiveHub.AddSection("RisingPrices");
             pricesSec.AddDefaultContent("RisingPrices");
@@ -407,7 +407,7 @@ public static partial class FearOfTheUnknown
             Isolation,
             str => str
                 .FormatWithReplacement(0, vpLoss)
-                .FormatWithIndex(0, outcomeIdx));
+                .FormatWithIndex(1, outcomeIdx));
     }
 
     internal static void S4Con3(GlobalData globalData)
@@ -544,7 +544,7 @@ public static partial class FearOfTheUnknown
             Isolation,
             str => str
                 .FormatWithReplacement(0, vars.Collab.ToString())
-                .FormatWithIndex(0, exIdx));
+                .FormatWithIndex(1, exIdx));
     }
 
     // =========================================================================
@@ -612,12 +612,12 @@ public static partial class FearOfTheUnknown
                 .FormatWithReplacement(2, pC)
                 .FormatWithReplacement(3, pD)
                 .FormatWithReplacement(4, creepyLoss)
-                .FormatWithCondition(0, () => globalData.PlayersNum == 2)
-                .FormatWithCondition(1, () => vars.IdA == "yes")
-                .FormatWithCondition(2, () => vars.IdB == "yes")
-                .FormatWithCondition(3, () => vars.IdC == "yes")
-                .FormatWithCondition(4, () => vars.IdD == "yes")
-                .FormatWithCondition(5, () => vars.Id > 0));
+                .FormatWithCondition(5, () => globalData.PlayersNum == 2)
+                .FormatWithCondition(6, () => vars.IdA == "yes")
+                .FormatWithCondition(7, () => vars.IdB == "yes")
+                .FormatWithCondition(8, () => vars.IdC == "yes")
+                .FormatWithCondition(9, () => vars.IdD == "yes")
+                .FormatWithCondition(10, () => vars.Id > 0));
     }
 
     internal static void SmugEvent2ACont(GlobalData globalData)
@@ -633,7 +633,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultContent(str =>
             str
                 .FormatWithReplacement(0, vars.RandomName)
-                .FormatWithIndex(0, exIdx));
+                .FormatWithIndex(1, exIdx));
         globalData.ActiveWindow.AddClickHereToContinue(
             goToBankDestruction ? SmugEvent2Aa : SmugEventEnd);
     }
@@ -779,11 +779,11 @@ public static partial class FearOfTheUnknown
                 .FormatWithReplacement(1, pB)
                 .FormatWithReplacement(2, pC)
                 .FormatWithReplacement(3, pD)
-                .FormatWithCondition(0, () => vars.IdA != "yes")
-                .FormatWithCondition(1, () => vars.IdB != "yes")
-                .FormatWithCondition(2, () => globalData.PlayersNum > 2 && vars.IdC != "yes")
-                .FormatWithCondition(3, () => globalData.PlayersNum > 3 && vars.IdD != "yes")
-                .FormatWithCondition(4, () => allVerified));
+                .FormatWithCondition(4, () => vars.IdA != "yes")
+                .FormatWithCondition(5, () => vars.IdB != "yes")
+                .FormatWithCondition(6, () => globalData.PlayersNum > 2 && vars.IdC != "yes")
+                .FormatWithCondition(7, () => globalData.PlayersNum > 3 && vars.IdD != "yes")
+                .FormatWithCondition(8, () => allVerified));
         globalData.ActiveWindow.AddClickHereToContinue(PEWitchEnding);
     }
 }

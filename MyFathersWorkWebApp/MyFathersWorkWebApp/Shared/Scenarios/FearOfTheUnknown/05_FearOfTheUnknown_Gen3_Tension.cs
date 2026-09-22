@@ -146,7 +146,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultContent(str =>
             str
                 .FormatWithReplacement(0, vars.Witch)
-                .FormatWithCondition(0, () => witchHasPlot));
+                .FormatWithCondition(1, () => witchHasPlot));
         globalData.ActiveWindow.AddClickHereToContinue(WitchTensionResolution_Setup);
     }
 
@@ -418,9 +418,9 @@ public static partial class FearOfTheUnknown
             str
                 .FormatWithReplacement(0, journalHeader)
                 .FormatWithReplacement(1, globalData.TownName)
-                .FormatWithCondition(0, () => vars.Kill == "butcher")
-                .FormatWithCondition(1, () => vars.Cursed == "2")
-                .FormatWithCondition(2, () => vars.Walls == "yes"));
+                .FormatWithCondition(2, () => vars.Kill == "butcher")
+                .FormatWithCondition(3, () => vars.Cursed == "2")
+                .FormatWithCondition(4, () => vars.Walls == "yes"));
         globalData.ActiveWindow.AddClickHereToContinue(
             isBadPath ? ThistenseBad : ThisTenseGood);
     }
@@ -634,7 +634,7 @@ public static partial class FearOfTheUnknown
             Caravancheck,
             str => str
                 .FormatWithReplacement(0, moveRight)
-                .FormatWithCondition(0, () => globalData.PlayersNum > 2));
+                .FormatWithCondition(1, () => globalData.PlayersNum > 2));
     }
 
     // =========================================================================

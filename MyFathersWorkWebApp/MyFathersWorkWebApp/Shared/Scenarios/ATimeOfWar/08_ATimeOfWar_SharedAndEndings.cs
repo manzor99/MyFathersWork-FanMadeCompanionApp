@@ -309,12 +309,12 @@ public static partial class ATimeOfWar
         globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent(
             text => text
-                .FormatWithReplacement(2, globalData.TownName)
-                .FormatWithReplacement(4, vars.WinnerName)
-                .FormatWithIndex(0, barracksVariant)
-                .FormatWithCondition(1, () => vars.EndChange == "yes")
-                .FormatWithIndex(2, persuadeVariant)
-                .FormatWithCondition(3, () => vars.Benevolent == "good"));
+                .FormatWithReplacement(0, globalData.TownName)
+                .FormatWithReplacement(1, vars.WinnerName)
+                .FormatWithIndex(2, barracksVariant)
+                .FormatWithCondition(3, () => vars.EndChange == "yes")
+                .FormatWithIndex(4, persuadeVariant)
+                .FormatWithCondition(5, () => vars.Benevolent == "good"));
         globalData.ActiveWindow.AddClickHereToContinue(FinalCredits);
     }
 

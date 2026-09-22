@@ -172,7 +172,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, journalHeader)
                .FormatWithReplacement(1, vars.RandomName)
-               .FormatWithCondition(0, () => globalData.PlayersNum <= 3));
+               .FormatWithCondition(2, () => globalData.PlayersNum <= 3));
         globalData.ActiveWindow.AddClickHereToContinue(WitchIntro2);
     }
 
@@ -184,7 +184,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, vars.WSuspect)
-               .FormatWithCondition(0, () => globalData.PlayersNum <= 3));
+               .FormatWithCondition(1, () => globalData.PlayersNum <= 3));
         globalData.ActiveWindow.AddClickHereToContinue(WitchIntro2_0);
     }
 
@@ -227,7 +227,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf1Options(globalData, 0, Witchwolf1b);
     }
 
@@ -252,7 +252,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf1Options(globalData, 1, globalData.PlayersNum >= 3 ? Witchwolf1c : Witchwolf1Hex);
     }
 
@@ -277,7 +277,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf1Options(globalData, 2, globalData.PlayersNum >= 4 ? Witchwolf1d : Witchwolf1Hex);
     }
 
@@ -302,7 +302,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf1Options(globalData, 3, globalData.PlayersNum >= 5 ? Witchwolf1e : Witchwolf1Hex);
     }
 
@@ -327,7 +327,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf1Options(globalData, 4, Witchwolf1Hex);
     }
 
@@ -385,7 +385,7 @@ public static partial class FearOfTheUnknown
             PopUpButton.Accept,
             Foreign,
             str => str.FormatWithReplacement(0, vars.Tracker.ToString())
-                      .FormatWithCondition(0, () => globalData.PlayersNum == 3));
+                      .FormatWithCondition(1, () => globalData.PlayersNum == 3));
     }
 
     // ==========================================
@@ -412,7 +412,7 @@ public static partial class FearOfTheUnknown
         {
             string activeHex = globalData.Years == Years.Early ? vars.Witch1 : vars.Witch2;
             return str.FormatWithReplacement(0, activeHex)
-                      .FormatWithCondition(0, () => globalData.Years == Years.Late);
+                      .FormatWithCondition(1, () => globalData.Years == Years.Late);
         });
 
         // Rumor Mill (Early & Middle Years)
@@ -718,7 +718,7 @@ public static partial class FearOfTheUnknown
             str.FormatWithReplacement(0, globalData.NewspaperName)
                .FormatWithReplacement(1, dateStr)
                .FormatWithReplacement(2, globalData.CityName)
-               .FormatWithCondition(0, () => wallsYes));
+               .FormatWithCondition(3, () => wallsYes));
         globalData.ActiveWindow.AddClickHereToContinue(WallEvent2_0);
     }
 
@@ -757,7 +757,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf2Options(globalData, 0, Witchwolf2b);
     }
 
@@ -782,7 +782,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf2Options(globalData, 1, globalData.PlayersNum >= 3 ? Witchwolf2c : Witchwolf2Hex);
     }
 
@@ -807,7 +807,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf2Options(globalData, 2, globalData.PlayersNum >= 4 ? Witchwolf2d : Witchwolf2Hex);
     }
 
@@ -832,7 +832,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf2Options(globalData, 3, globalData.PlayersNum >= 5 ? Witchwolf2e : Witchwolf2Hex);
     }
 
@@ -857,7 +857,7 @@ public static partial class FearOfTheUnknown
         globalData.ActiveWindow.AddDefaultBaseTitle();
         globalData.ActiveWindow.AddDefaultContent(str =>
             str.FormatWithReplacement(0, pName)
-               .FormatWithCondition(0, () => isWitch));
+               .FormatWithCondition(1, () => isWitch));
         AddWitchwolf2Options(globalData, 4, Witchwolf2Hex);
     }
 
@@ -926,7 +926,7 @@ public static partial class FearOfTheUnknown
             str.FormatWithReplacement(0, vars.WSuspect)
                .FormatWithReplacement(1, vars.PointAi)
                .FormatWithReplacement(2, vars.HexAi)
-               .FormatWithCondition(0, () => globalData.PlayersNum <= 3));
+               .FormatWithCondition(3, () => globalData.PlayersNum <= 3));
         globalData.ActiveWindow.AddClickHereToContinue(Witchres1);
     }
 
@@ -985,7 +985,7 @@ public static partial class FearOfTheUnknown
             str.FormatWithReplacement(0, journalHeader)
                .FormatWithReplacement(1, vars.Witch)
                .FormatWithReplacement(2, vars.RandomName)
-               .FormatWithCondition(0, () => witchIsSuspect));
+               .FormatWithCondition(3, () => witchIsSuspect));
         globalData.ActiveWindow.AddClickHereToContinue(Witchres2_0);
     }
 
@@ -1001,7 +1001,7 @@ public static partial class FearOfTheUnknown
             PopUpButton.Accept,
             Caravancheck,
             str => str.FormatWithReplacement(0, vars.Witch)
-                      .FormatWithCondition(0, () => !witchIsSuspect));
+                      .FormatWithCondition(1, () => !witchIsSuspect));
     }
 
     private static void Witchres3(GlobalData globalData)
@@ -1035,8 +1035,8 @@ public static partial class FearOfTheUnknown
             Caravancheck,
             str => str.FormatWithReplacement(0, vars.FalseWitch)
                       .FormatWithReplacement(1, vars.Witch)
-                      .FormatWithCondition(0, () => !falseWitchIsSuspect)
-                      .FormatWithCondition(1, () => !witchIsSuspect));
+                      .FormatWithCondition(2, () => !falseWitchIsSuspect)
+                      .FormatWithCondition(3, () => !witchIsSuspect));
     }
 
     // ==========================================
@@ -1180,7 +1180,7 @@ public static partial class FearOfTheUnknown
             str.FormatWithReplacement(0, globalData.NewspaperName)
                .FormatWithReplacement(1, dateStr)
                .FormatWithReplacement(2, globalData.CityName)
-               .FormatWithCondition(0, () => cursedOne));
+               .FormatWithCondition(3, () => cursedOne));
         globalData.ActiveWindow.AddClickHereToContinue(
             cursedOne ? TensionIntro : IsolationIntro);
     }
