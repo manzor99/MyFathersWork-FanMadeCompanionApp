@@ -633,7 +633,7 @@ public static partial class FearOfTheUnknown
             PopUpButton.Accept,
             Caravancheck,
             str => str
-                .FormatWithReplacement(0, moveRight)
+                .FormatWithReplacement(0, moveRight.ToString())
                 .FormatWithCondition(1, () => globalData.PlayersNum > 2));
     }
 

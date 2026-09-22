@@ -393,7 +393,7 @@ public static partial class FearOfTheUnknown
         bool isSuccess = vars.Pay == 1 || vars.Trial == 0;
         int outcomeIdx = isSuccess ? 0 : vars.Trial == 1 ? 1 : 2;
         int vpLoss = Random.Shared.Next(1, 3);
-        PopUpIcon icon = outcomeIdx == 0
+        string icon = outcomeIdx == 0
             ? PopUpIcon.MFWlogo
             : outcomeIdx == 1
                 ? PopUpIcon.Creepy_Icon
@@ -406,7 +406,7 @@ public static partial class FearOfTheUnknown
             PopUpButton.Accept,
             Isolation,
             str => str
-                .FormatWithReplacement(0, vpLoss)
+                .FormatWithReplacement(0, vpLoss.ToString())
                 .FormatWithIndex(1, outcomeIdx));
     }
 
@@ -611,7 +611,7 @@ public static partial class FearOfTheUnknown
                 .FormatWithReplacement(1, pB)
                 .FormatWithReplacement(2, pC)
                 .FormatWithReplacement(3, pD)
-                .FormatWithReplacement(4, creepyLoss)
+                .FormatWithReplacement(4, creepyLoss.ToString())
                 .FormatWithCondition(5, () => globalData.PlayersNum == 2)
                 .FormatWithCondition(6, () => vars.IdA == "yes")
                 .FormatWithCondition(7, () => vars.IdB == "yes")

@@ -199,7 +199,39 @@ public class FearOfTheUnknownVars
     public int    Pay           { get; set; }
     public int    Trial         { get; set; }
     public int    TempBs        { get; set; }
+    public string TempCheck     { get; set; } = string.Empty;
     public string Ex            { get; set; } = string.Empty;
+
+    public int GetPl(int i) => (i >= 0 && i < Pl.Length) ? Pl[i] : 0;
+    public void SetPl(int i, int v) { if (i >= 0 && i < Pl.Length) Pl[i] = v; }
+    public int GetConfirm(int i) => (i >= 0 && i < Confirm.Length) ? Confirm[i] : 0;
+    public void SetConfirm(int i, int v) { if (i >= 0 && i < Confirm.Length) Confirm[i] = v; }
+    public string GetPlot(int i) => (i >= 0 && i < Plot.Length) ? Plot[i] : string.Empty;
+    public void SetPlot(int i, string v) { if (i >= 0 && i < Plot.Length) Plot[i] = v; }
+    public string GetWit(int i) => (i >= 0 && i < Wit.Length) ? Wit[i] : string.Empty;
+    public void SetWit(int i, string v) { if (i >= 0 && i < Wit.Length) Wit[i] = v; }
+    public void SetFate(int fate, string pName)
+    {
+        switch (fate)
+        {
+            case 1: Fate1 = pName; break;
+            case 2: Fate2 = pName; break;
+            case 3: Fate3 = pName; break;
+            case 4: Fate4 = pName; break;
+            case 5: Fate5 = pName; break;
+            case 6: Fate6 = pName; break;
+        }
+    }
+    public string GetFate(int fate) => fate switch
+    {
+        1 => Fate1,
+        2 => Fate2,
+        3 => Fate3,
+        4 => Fate4,
+        5 => Fate5,
+        6 => Fate6,
+        _ => string.Empty
+    };
     public int    Dev           { get; set; }
     public int    BusVp         { get; set; }
     public int    BTemp         { get; set; }

@@ -337,7 +337,7 @@ public static partial class FearOfTheUnknown
         foreach (string loc in locations)
         {
             string selectedLoc = loc;
-            globalData.ActiveWindow.Elements.Add(new GameplayElement(selectedLoc, gd =>
+            globalData.ActiveWindow!.Elements.Add(new GameplayElement(selectedLoc, gd =>
             {
                 gd.FearOfTheUnknownVars.SetWit(playerIdx, selectedLoc);
                 nextPassage(gd);
@@ -867,7 +867,7 @@ public static partial class FearOfTheUnknown
         foreach (string loc in locations)
         {
             string selectedLoc = loc;
-            globalData.ActiveWindow.Elements.Add(new GameplayElement(selectedLoc, gd =>
+            globalData.ActiveWindow!.Elements.Add(new GameplayElement(selectedLoc, gd =>
             {
                 gd.FearOfTheUnknownVars.SetWit(playerIdx, selectedLoc);
                 nextPassage(gd);

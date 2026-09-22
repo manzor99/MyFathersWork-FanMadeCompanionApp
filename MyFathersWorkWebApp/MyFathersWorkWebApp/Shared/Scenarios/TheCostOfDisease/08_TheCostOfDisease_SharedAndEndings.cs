@@ -51,7 +51,7 @@ public static partial class TheCostOfDisease
 
     private static void DetEffectContinue(GlobalData globalData)
     {
-        string nextTarget = globalData.TmpValues.GetValueOrDefault(_DET_NEXT_TMP, string.Empty);
+        string nextTarget = (string)(globalData.TmpValues.GetValueOrDefault(_DET_NEXT_TMP, string.Empty) ?? string.Empty);
         switch (nextTarget)
         {
             case "UniEvent1":

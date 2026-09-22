@@ -29,6 +29,9 @@ public class GlobalData
     public string                     PlayerCName          { get; set; } = string.Empty;
     public string                     PlayerDName          { get; set; } = string.Empty;
     public string                     TownName             { get; set; } = string.Empty;
+    [JsonIgnore] public string        CityName             => TownName;
+    [JsonIgnore] public string        NewspaperName        => FearOfTheUnknownVars.Newspaper;
+    [JsonIgnore] public string[]      PlayersName          => [PlayerAName, PlayerBName, PlayerCName, PlayerDName, string.Empty];
     public Years                      Years                { get; set; } = Years.Early;
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();

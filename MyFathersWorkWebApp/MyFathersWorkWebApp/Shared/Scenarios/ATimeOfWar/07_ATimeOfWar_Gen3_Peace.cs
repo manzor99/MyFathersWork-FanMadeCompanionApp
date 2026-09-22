@@ -300,11 +300,10 @@ public static partial class ATimeOfWar
         GameplayWindow window = new GameplayWindow(globalData);
         window.AddGameplayTitle(GlobalTags.Gameplay_Generation_III);
         window.AddDefaultBaseTitle();
-        window.AddNextContentWithLinks(1, new Action<GlobalData>[]
-        {
+        window.AddNextContentWithLinks(1, [
             ATOW_FamineEventYes,
             ATOW_FamineEventNo
-        }, true);
+        ], true);
     }
 
     private static void ATOW_FamineEventV(GlobalData globalData)
@@ -327,11 +326,10 @@ public static partial class ATimeOfWar
         GameplayWindow window = new GameplayWindow(globalData);
         window.AddGameplayTitle(GlobalTags.Gameplay_Generation_III);
         window.AddDefaultTitle();
-        window.AddNextContentWithLinks(1, new Action<GlobalData>[]
-        {
+        window.AddNextContentWithLinks(1, [
             ATOW_FamineEventYes,
             ATOW_FamineEventNo
-        }, true);
+        ], true);
     }
 
     private static void ATOW_FamineEventYes(GlobalData globalData)
@@ -458,11 +456,10 @@ public static partial class ATimeOfWar
         GameplayWindow window = new GameplayWindow(globalData);
         window.AddGameplayTitle(GlobalTags.Gameplay_Generation_III);
         window.AddDefaultTitle();
-        window.AddNextContentWithLinks(1, new Action<GlobalData>[]
-        {
+        window.AddNextContentWithLinks(1, [
             PeaceEventGas,
             PeaceEventNo
-        }, true);
+        ], true);
     }
 
     private static void PeaceEventGas(GlobalData globalData)
