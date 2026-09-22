@@ -33,6 +33,7 @@ public class GlobalData
     public Generation                 Generation           { get; set; } = Generation.First;
     public TheCostOfDiseaseVars       TheCostOfDiseaseVars { get; }      = new();
     public ATimeOfWarVars             ATimeOfWarVars       { get; }      = new();
+    public FearOfTheUnknownVars       FearOfTheUnknownVars { get; }      = new();
     public Dictionary<string, object> TmpValues            { get; }      = new();
 
     [JsonIgnore] public GameplayHub?        ActiveHub        { get; set; }
@@ -50,6 +51,7 @@ public class GlobalData
     {
         TheCostOfDiseaseVars.Reset(this);
         ATimeOfWarVars.Reset(this);
+        FearOfTheUnknownVars.Reset(this);
     }
 
     public string GetLocalizedUITag(string tag)
