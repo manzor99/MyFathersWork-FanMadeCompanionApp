@@ -66,6 +66,8 @@ public static partial class TheCostOfDisease
             case "DeteriorationHub":
                 DeteriorationHub(globalData);
                 break;
+            case "Hub":
+                break;
         }
     }
 
