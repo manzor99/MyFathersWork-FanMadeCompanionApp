@@ -19,6 +19,99 @@ public static class Validator
 
         Console.WriteLine("=== VALIDATOR STARTING ===");
 
+        // Test ProcessLocalizationFile as WebApp runs it
+        Console.WriteLine("\n--- Testing ProcessLocalizationFile for all scenarios ---");
+        var testScenarios = new[]
+        {
+            ("TheCostOfDisease", "TheCostOfDisease_Localization.csv", "TheCostOfDisease_Gameplay_Localization.csv"),
+            ("FearOfTheUnknown", "FearOfTheUnknown_Localization.csv", "FearOfTheUnknown_Gameplay_Localization.csv"),
+            ("ATimeOfWar", "ATimeOfWar_Localization.csv", "ATimeOfWar_Gameplay_Localization.csv"),
+        };
+
+        var uiFileText = File.ReadAllText(Path.Combine(locDir, "UI_Localization.csv"));
+        var uiTarget = new Dictionary<string, Dictionary<string, string>>();
+        var uiErrors = ProcessLoc(uiFileText, uiTarget);
+        foreach (var err in uiErrors) Console.WriteLine($"[UI LOC ERROR] {err}");
+        Console.WriteLine($"UI Localization loaded {uiTarget.Count} languages: {string.Join(", ", uiTarget.Keys)}");
+
+        foreach (var (scenName, locFile, gameFile) in testScenarios)
+        {
+            Console.WriteLine($"\nTesting scenario: {scenName}");
+            try
+            {
+                var scenTarget = new Dictionary<string, Dictionary<string, string>>();
+                var gameTarget = new Dictionary<string, Dictionary<string, string>>();
+                string locContent = File.ReadAllText(Path.Combine(locDir, locFile));
+                string gameContent = File.ReadAllText(Path.Combine(locDir, gameFile));
+                var locErrors = ProcessLoc(locContent, scenTarget);
+                foreach (var err in locErrors) Console.WriteLine($"  [LOC ERROR] {err}");
+                Console.WriteLine($"  Loaded {scenTarget.Count} scenario languages: {string.Join(", ", scenTarget.Keys)}");
+
+                var gameErrors = ProcessLoc(gameContent, gameTarget);
+                foreach (var err in gameErrors) Console.WriteLine($"  [GAMEPLAY LOC ERROR] {err}");
+                Console.WriteLine($"  Loaded {gameTarget.Count} gameplay languages: {string.Join(", ", gameTarget.Keys)}");
+
+                // Check scenario language button options like PlayersScenarioLanguage.razor does:
+                // foreach (string localizationId in _ScenarioLocalizations.Keys)
+                //     _LocalizationOptions[localizationId] = GlobalData.GetLocalizedUITag("ScenarioLang_" + localizationId);
+                foreach (string localizationId in scenTarget.Keys)
+                {
+                    string uiTag = "ScenarioLang_" + localizationId;
+                    bool hasTagInUi = false;
+                    foreach (var langDict in uiTarget.Values)
+                    {
+                        if (langDict.ContainsKey(uiTag))
+                        {
+                            hasTagInUi = true;
+                            Console.WriteLine($"  Language button for '{localizationId}': label = '{langDict[uiTag]}'");
+                            break;
+                        }
+                    }
+                    if (!hasTagInUi)
+                    {
+                        Console.WriteLine($"  [MISSING UI TAG ERROR] UI_Localization missing tag: '{uiTag}' for localizationId '{localizationId}'");
+                    }
+
+                    // Check Gameplay_Lang tag
+                    if (!scenTarget[localizationId].ContainsKey("Gameplay_Lang"))
+                    {
+                        Console.WriteLine($"  [MISSING GAMEPLAY_LANG ERROR] '{localizationId}' has no Gameplay_Lang tag!");
+                    }
+                    else
+                    {
+                        string gLang = scenTarget[localizationId]["Gameplay_Lang"];
+                        if (!gameTarget.ContainsKey(gLang))
+                        {
+                            Console.WriteLine($"  [INVALID GAMEPLAY_LANG ERROR] '{localizationId}' has Gameplay_Lang='{gLang}' but gameplay file only has languages: {string.Join(", ", gameTarget.Keys)}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  [EXCEPTION in {scenName}]: {ex.Message}");
+            }
+        }
+
+        Console.WriteLine("\n--- Testing docs/localization files ---");
+        string docsLocDir = Path.Combine(baseDir, "docs", "localization");
+        if (Directory.Exists(docsLocDir))
+        {
+            foreach (var (scenName, locFile, gameFile) in testScenarios)
+            {
+                Console.WriteLine($"Testing docs scenario: {scenName}");
+                var scenTarget = new Dictionary<string, Dictionary<string, string>>();
+                var gameTarget = new Dictionary<string, Dictionary<string, string>>();
+                string locContent = File.ReadAllText(Path.Combine(docsLocDir, locFile));
+                string gameContent = File.ReadAllText(Path.Combine(docsLocDir, gameFile));
+                var locErrors = ProcessLoc(locContent, scenTarget);
+                foreach (var err in locErrors) Console.WriteLine($"  [DOCS LOC ERROR] {err}");
+                var gameErrors = ProcessLoc(gameContent, gameTarget);
+                foreach (var err in gameErrors) Console.WriteLine($"  [DOCS GAMEPLAY ERROR] {err}");
+            }
+        }
+
+
         // 1. Check PopUpIcon constants against images
         Console.WriteLine("\n--- Checking PopUpIcon constants ---");
         string popupIconFile = Path.Combine(webAppDir, "Shared", "Consts", "PopUpIcon.cs");
@@ -183,5 +276,54 @@ public static class Validator
             }
         }
         return dict;
+    }
+
+    private static List<string> ProcessLoc(string localization, Dictionary<string, Dictionary<string, string>> target)
+    {
+        var errors = new List<string>();
+        string[] lines = localization.Split(new[] { '\r', '\n' });
+        string[] languages = [];
+
+        for (int x = 0; x < lines.Length; ++x)
+        {
+            if (string.IsNullOrWhiteSpace(lines[x])) continue;
+            string[] data = lines[x].Split(';');
+
+            if (x == 0)
+            {
+                List<string> languagesTmp = new();
+                for (int y = 1; y < data.Length; ++y)
+                {
+                    target[data[y]] = new();
+                    languagesTmp.Add(data[y]);
+                }
+
+                languages = languagesTmp.ToArray();
+                continue;
+            }
+
+            if (data[0].StartsWith("//")) continue;
+            if (data[0] == string.Empty) continue;
+            string tag = data[0];
+
+            if (data.Length > languages.Length + 1)
+            {
+                errors.Add($"Line {x + 1} has {data.Length} parts (expected {languages.Length + 1}) due to unescaped semicolon! Tag: '{tag}' Line: '{lines[x]}'");
+                continue;
+            }
+
+            for (int y = 1; y < data.Length; ++y)
+            {
+                if (target[languages[y - 1]].ContainsKey(tag))
+                {
+                    errors.Add($"Duplicate tag in line {x + 1}: {tag}");
+                }
+                else
+                {
+                    target[languages[y - 1]][tag] = data[y];
+                }
+            }
+        }
+        return errors;
     }
 }
