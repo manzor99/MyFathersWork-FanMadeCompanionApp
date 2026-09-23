@@ -14,7 +14,10 @@ public static class Extensions
 
         for (int x = 0; x < lines.Length; ++x)
         {
-            string[] data = lines[x].Split(';');
+            if (string.IsNullOrWhiteSpace(lines[x])) continue;
+            string[] data = languages.Length > 0
+                ? lines[x].Split(';', languages.Length + 1)
+                : lines[x].Split(';');
 
             if (x == 0)
             {
@@ -33,7 +36,7 @@ public static class Extensions
             if (data[0] == string.Empty) continue;
             string tag = data[0];
 
-            for (int y = 1; y < data.Length; ++y)
+            for (int y = 1; y < data.Length && y - 1 < languages.Length; ++y)
             {
                 if (target[languages[y - 1]].ContainsKey(tag)) throw new Exception("Duplicate tag: " + tag);
                 target[languages[y - 1]][tag] = data[y];
