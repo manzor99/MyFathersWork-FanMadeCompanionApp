@@ -25,7 +25,7 @@ Witchwolf2d_0_Content;<b>{{0=PlayerName}}</b>:<br><br>{{1=?|<b>YOU ARE THE WITCH
 Witchwolf2e_0_Content;<b>{{0=PlayerName}}</b>:<br><br>{{1=?|<b>YOU ARE THE WITCH!</b> Select which location you wish to place the <b>Witch's Hex</b> <icon=S2_WitchHexToken> upon for the Middle Years:|<b>You are Innocent.</b> Select a location below so nobody can tell from watching you whether you are the Witch (your choice will be recorded in the Rumor Mill):}}
 Witchwolfresolution_Content;{{0=JournalHeader}}<br><br><b>Account of {{1=RandomName}}</b><br><br>The town can endure the unseen curses no longer! Torch-bearing crowds have surrounded the Town Hall, demanding that the estates name the Witch responsible for hexing the village.
 ScenarioBox_FOTU_Title;Fear of the Unknown
-ScenarioBox_FOTU_Content;Retrieve the <b>Fear of the Unknown</b> Scenario Box. Keep its contents concealed until you are instructed to retrieve specific components.<br><br><sprite=ScenarioBox3D_Fear>
+ScenarioBox_FOTU_Content;Retrieve the <b>Fear of the Unknown</b> Scenario Box. Keep its contents concealed until you are instructed to retrieve specific components.<br><br><sprite=ScenarioBoxFlat_Fear>
 ScenarioBox_FOTU_Content0;<link=0>Click here once you have the Scenario Box...</link>
 Prologue_FOTU_Title;Prologue
 Prologue_FOTU_Content;As the descendants of a visionary, yet deeply misunderstood scientist, you have inherited estates on the outskirts of <b>{{0=TownName}}</b>. The townsfolk eye your work with a mixture of awe and dread, whispering of unnatural experiments behind closed shutters.<br><br>In this remote corner of the world, superstition and ambition collide. Will you illuminate the darkness with reason, or be consumed by the fear of the unknown?

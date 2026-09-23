@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 
 namespace MyFathersWorkWebApp;
@@ -44,11 +44,11 @@ public static class Extensions
     public static string InsertImages(this string text)
     {
         string pattern     = "<icon=([A-Za-z0-9_]+)>";
-        string replacement = "<img style=\"display: inline-block; height: 1.5em; width: auto; transform: translate(0, -0.1em);\" src=\"./images/gameplay/$1.png\" alt=\"$1\">";
+        string replacement = "<img style=\"display: inline-block; height: 1.5em; width: auto; transform: translate(0, -0.1em);\" src=\"./images/gameplay/$1.png\" onerror=\"if(!this.src.includes('/images/setup/'))this.src=this.src.replace('/images/gameplay/','/images/setup/');\" alt=\"$1\">";
         text = Regex.Replace(text, pattern, replacement);
 
         string pattern2     = "<sprite=([A-Za-z0-9_]+)>";
-        string replacement2 = "<img class=\"full-image\" style=\"height: 8em; display: block; margin: 1rem auto;\" src=\"./images/gameplay/$1.png\" alt=\"$1\">";
+        string replacement2 = "<img class=\"full-image\" style=\"height: 8em; display: block; margin: 1rem auto;\" src=\"./images/gameplay/$1.png\" onerror=\"if(!this.src.includes('/images/setup/'))this.src=this.src.replace('/images/gameplay/','/images/setup/');\" alt=\"$1\">";
         return Regex.Replace(text, pattern2, replacement2);
     }
 

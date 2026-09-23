@@ -42,10 +42,10 @@ public static class PopUpIcon
     public const string CompulsionBack             = "CompulsionBack";
     public const string Spouse_Servant             = "Spouse_Servant";
     public const string Servant                    = "Servant";
-    public const string LoseServant_Icon           = "LoseServant_Icon";
-    public const string GainBody_Icon              = "GainBody_Icon";
-    public const string ValidationToken            = "ValidationToken";
-    public const string GainExperiment_Icon        = "GainExperiment_Icon";
+    public const string LoseServant_Icon           = "Servant";
+    public const string GainBody_Icon              = "Bodies_Icon";
+    public const string ValidationToken            = "StorybookToken";
+    public const string GainExperiment_Icon        = "ExperimentABack";
     public const string AdvanceAngryMob            = "AdvanceAngryMob";
     public const string Bodies_Icon                = "Bodies_Icon";
     public const string BuildingS3Barracks         = "BuildingS3Barracks";
