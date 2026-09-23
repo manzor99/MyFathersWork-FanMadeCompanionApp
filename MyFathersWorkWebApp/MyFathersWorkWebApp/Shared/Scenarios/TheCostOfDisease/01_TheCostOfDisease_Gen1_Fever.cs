@@ -173,7 +173,7 @@ public static partial class TheCostOfDisease
     {
         globalData.SaveToUndo();
         globalData.ActiveWindow = new GameplayWindow(globalData);
-        globalData.ActiveWindow.AddDefaultContent();
+        globalData.ActiveWindow.AddDefaultTitle();
         globalData.ActiveWindow.AddDefaultContent();
         globalData.ActiveWindow.AddNextContent(1, true);
         globalData.ActiveWindow.AddAllPlayersNamesAsOptions(saneName =>
