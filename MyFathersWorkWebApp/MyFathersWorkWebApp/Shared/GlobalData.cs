@@ -247,7 +247,12 @@ public class GlobalData
 
         await LoadScenarioLanguagesOptionsAsync(nav, http, scenarioLocalizations, scenarioGameplayLocalizations);
         Scenario_Localization          = scenarioLocalizations[ScenarioLanguage];
-        Scenario_Gameplay_Localization = scenarioGameplayLocalizations[scenarioLocalizations[ScenarioLanguage]["Gameplay_Lang"]];
+        string gameplayLang            = scenarioLocalizations[ScenarioLanguage].TryGetValue("Gameplay_Lang", out string? gl) ? gl : ScenarioLanguage;
+        if (!scenarioGameplayLocalizations.ContainsKey(gameplayLang) && scenarioGameplayLocalizations.Count > 0)
+        {
+            gameplayLang = scenarioGameplayLocalizations.Keys.First();
+        }
+        Scenario_Gameplay_Localization = scenarioGameplayLocalizations[gameplayLang];
 
         Action<GlobalData>? activeHub = GetHubMethod();
 
