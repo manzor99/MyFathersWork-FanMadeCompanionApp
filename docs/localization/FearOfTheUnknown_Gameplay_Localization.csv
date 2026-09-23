@@ -193,7 +193,7 @@ LiberalEventGood_Setup_Content;No player pays anything towards the bribe. Return
 LiberalEventA_Setup_Content;Every player pays <b>$1</b> to the supply.<br /><br />Any player who cannot pay must instead lose <b>2VP</b>.
 LiberalEventB_Setup_Content;The <b>{{0=Asylum}}</b> program is shut down. Return its Estate Upgrade and all remaining Rehabilitation tokens to the Scenario box.<br /><br />Every player who still holds a Rehabilitation token discards it and gains <b>1VP</b> for each one discarded.
 LiberalTaxes2_Setup_Content;Every player who paid their estate taxes in full gains <b>{{0=2}}VP</b>.<br /><br />Every player who refused to pay loses <b>{{1=1}}VP</b> and must return one Upgrade of their choice from their Estate to the box.
-TaxesEventGood_Setup_Content;No player pays estate taxes this round. Return all money set aside for the tax to its owners.<br /><br />Every player also gains <b>1VP</b>.
+TaxesEventGood_Setup_Content;Each player who chose to pay money to resolve their taxes recovers that amount back to their Quarters and <b>gains 2VP</b>.<br /><br />All other players <b>gain 1 <icon=Creepy_Icon></b>.
 Payment2Thanks_Setup_Content;Pay <b>${{0=3}}</b> to the supply. Your contract is settled and your marker is removed from the contract track.
 Payment2No_Setup_Content;Return your <b>Self</b> <icon=Self> to the Scenario box. You are dead.<br /><br />You continue to score at the end of the game, but you may no longer take actions or gain rewards.
 AsylumTreatmentBPay_Setup_Content;Pay <b>$2</b> to the supply.<br /><br />The patient is discharged with no further consequences. They also gain one <b>Rehabilitation</b> token.
