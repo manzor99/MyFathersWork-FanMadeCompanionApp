@@ -579,7 +579,7 @@ public static partial class ATimeOfWar
         globalData.ActivePopup = new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.ChooseFromSupply_Icon,
+            PopUpIcon.MFWlogo,
             PopUpButton.Accept,
             FinishRumor);
     }
@@ -619,7 +619,7 @@ public static partial class ATimeOfWar
         globalData.ActivePopup = new GameplayPopup(
             globalData,
             PopUpTitle.Setup,
-            PopUpIcon.DiscardExperiment_Icon,
+            PopUpIcon.AdvanceAngryMob,
             PopUpButton.Accept,
             FinishRumor);
     }

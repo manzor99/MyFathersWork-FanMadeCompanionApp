@@ -217,7 +217,7 @@ public static partial class TheCostOfDisease
     private static void Evilsforgive_0(GlobalData globalData)
     {
         globalData.SaveToUndo();
-        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.Creepy_Icon, PopUpButton.Confirm, EquitableValues);
+        globalData.ActivePopup = new GameplayPopup(globalData, PopUpTitle.SpecialSetup, PopUpIcon.S1_MastersStudy, PopUpButton.Confirm, EquitableValues);
     }
 
     private static void Evilsforgive_1(GlobalData globalData)
