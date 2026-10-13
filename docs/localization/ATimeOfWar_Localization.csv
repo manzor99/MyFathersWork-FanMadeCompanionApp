@@ -69,18 +69,18 @@ RumorD6Guns_Reveal_Content1;{{0=|Fund the University archives to advance <b>Know
 RumorD6Guns_Reveal_Content2;{{0=|Fund the University archives to advance <b>Knowledge</b>.|Expand the regional warehouses to secure <b>Ingredients</b>.|Subsidize the town bank to stimulate <b>Wealth</b>.}}
 RumorD6Confirm_Title;<b>Proposal Endorsed</b>
 RumorD6Confirm_Content;The industrialist nods approvingly and seals your recommendation into an official ledger. '{{0=|The University will receive the council's full backing.|Our supply depots will be stocked with the finest ingredients.|The town bank will open new lines of credit immediately.}}'
-RumorCreep_Title;<b>Unsettling Encounter</b>
-RumorCreep_Content;As you step away from the hermit, a cold shiver runs down your spine. His ravings about fractured timelines and approaching doom linger in your thoughts all the way back to your estate.
-RumorCreep_Setup_Content;Advance your Insanity Marker 1 space on the Insanity Track <icon=Creepy_Icon>.
-RumorIngredient_Title;<b>Surplus Supplies</b>
-RumorIngredient_Content;On your way out of the Town Hall, a grateful quartermaster offers you a crate of surplus materials left behind by a passing supply wagon.
-RumorIngredient_Setup_Content;Gain 1 Ingredient of your choice from the supply.
-RumorKnowledge_Title;<b>Forgotten Notes</b>
-RumorKnowledge_Content;While perusing the Town Hall records, you discover a bundle of correspondence left behind by a visiting natural philosopher.
-RumorKnowledge_Setup_Content;Gain 1 Knowledge cube of your choice from the supply.
-RumorPitch_Title;<b>ALucrative Buyer</b>
-RumorPitch_Content;A military procurement agent approaches you on the steps of the Town Hall, offering hard coin in exchange for any theoretical schematics you are willing to part with.
-RumorPitch_Setup_Content;You may discard 1 Experiment card to gain $3 from the supply.
+RumorCreep_Title;<b>Curious Individual</b>
+RumorCreep_Content;My intense curiosity was noted by the townspeople, and it appeared that my conversation with the vagrant had created a stir amongst the local gossips. I resolved to keep my meetings more clandestine in the future.
+RumorCreep_Setup_Content;<b>Gain 1VP</b> and <b>gain 1 <icon=Creepy_Icon></b>.
+RumorIngredient_Title;<b>Procurement of Ingredients</b>
+RumorIngredient_Content;A local farmer had observed my conversation, and after determining an agreeable moment to greet me, we engaged in a cordial chat about the local economy. The earthy individual even suggested a visit to his plantation, which turned out to be most advantageous.
+RumorIngredient_Setup_Content;Gain 1 Ingredient of your choice from the supply. If it is a <icon=Bodies_Icon>, <b>gain 1 <icon=Creepy_Icon></b>.
+RumorKnowledge_Title;<b>Advancement of Knowledge</b>
+RumorKnowledge_Content;While it seemed anomalous to me at the time, when my conversation ended I was immediately greeted by a fellow who introduced himself as one who shared an affinity for the scientific. I was intrigued and invited the young man in the brown sack suit to dine with me at a local cafe. Admittedly, my university knowledge was the main course, but I was still able to glean a few novel tidbits.
+RumorKnowledge_Setup_Content;Gain 1 Knowledge cube of your choice from the supply. If it is "Occult", <b>gain 1 <icon=Creepy_Icon></b>.
+RumorPitch_Title;<b>Dashing Conversationalist</b>
+RumorPitch_Content;At university, I had always excelled at public speaking engagements. So when our conversation concluded, I spent the next few hours introducing myself to the less than charming group of locals that frequently attended political meetings. While they may not have fully comprehended the intelligence I exuded, there was certainly an air of cheerfulness when I exited the building.
+RumorPitch_Setup_Content;Move the <icon=AngryMob_Icon> <b>Marker one space to the right</b> and <b>gain 1VP</b>.
 GunsAnnouncement_Title;<b>An Investment in {{0=townName}}</b>
 GunsAnnouncement_Content;Before adjourning the assembly, the magistrate announces the council's new economic initiative for <b>{{0=townName}}</b>:<br /><br />'{{1=|By order of the town council, additional grants have been awarded to the University! Scholars studying there will gain extra Knowledge.|By order of the town council, our markets and depots have been expanded! Citizens may purchase extra Ingredients when visiting town shops.|By order of the town council, the local bank has been subsidized! Citizens visiting the Bank will receive additional funds.}}'
 TakeEvent_Title;<b>Military Protection</b>
@@ -356,7 +356,7 @@ RoyalDecreeExplain_0_Content;Look at each player's <i>Allegiance Track</i>. Ever
 RoyalPriceisRight_SubTitle;Setup
 RoyalPriceisRight_Title;Rebuilding the Town
 RoyalPriceisRight_Content;With such direct access to royalty, it was mere weeks before I garnered a curious intrigue for my work. I knew this notoriety would serve my purposes well and shield me from scrutiny of my more unscrupulous designs.<br><br>However, intrigue is what I desired. Suspicions, I did not. I aimed to remain like a whispering shadow, a ghostly hand so close as to curry favor and power, yet far enough removed to not arouse undesired attention. With such dark work to be done, it would require a deft and meticulous hand. And as luck would have it, this was precisely what I was born to do.
-RoyalPriceisRight_0_Content;Turn the Village Chronicles to <b>Page 10</b> for the <b>Early Years</b>.<br><br>Place the Suspicion Marker (Gray Angry Mob token) on the <b>first space of the Suspicion Track</b> (containing the setup icon).{{0=?|<br><br>Every player must pay an immediate $2 estate tax now and at the beginning of each round this generation.}}
+RoyalPriceisRight_0_Content;Return the <b>Suspicion</b> and <icon=AngryMob_Icon> Markers to the game box. Retrieve the <icon=S3_CrownToken> token and place it on space <b>{{0=tracker}}</b> of the <icon=Creepy_Icon> Track.<br><br>At the End of this Generation, the player(s) closest to the <icon=S3_CrownToken> token on the <icon=Creepy_Icon> Track without overlapping or exceeding it will <b>gain 6VP</b>.<br><br>However, if a player's token ever overlaps or exceeds the <icon=S3_CrownToken> token, there will be permanent negative consequences for them.
 MonarchReign_Title;Monarch Reign
 MonarchReign_Allegiance_Title;Monarchist Allegiance
 MonarchReign_Allegiance_Content;If a player does <b>NOT</b> have a Unified Monarchist Flag token face-up, their <b>Self</b> piece {{0=?|cannot visit a Town Location.|only takes an action <b>once</b> when visiting a Town Location.}}
@@ -373,12 +373,12 @@ MonarchReign_CommemorativeStatue_Title;<icon=StorybookToken> Commemorative Statu
 MonarchReign_CommemorativeStatue_ClickHere; When a player visits the <icon=StorybookToken> Commemorative Statue.
 MonarchReign_CommemorativeStatue_Content;
 MonarchReign_NextRoundSetup_Content;{{0=?|Turn the Village Chronicles to <b>Page 11</b> for the <b>Middle Years</b>.|Turn the Village Chronicles to <b>Page 12</b> for the <b>Late Years</b>.}}{{1=?|<br><br>Every player must pay an immediate $2 estate tax for the new round.}}
-FirstCrownCons_Title;Secrets in the Shadows
-FirstCrownCons_Content;As the cousin met with the Royal Envoy to curry favor with the King, their sleeve accidentally caught on the corner of the table. Underneath a stack of papers, a small leather-bound booklet was revealed with an unfamiliar symbol embossed on its cover.<br><br>The envoy quickly covered the booklet and cleared his throat. <i>There are others who also reward loyalty and ambition,</i> he whispered, his eyes darting toward the door. <i>They operate in the shadows of the Crown, guiding the hand that holds the scepter. Should you wish to serve a higher purpose... keep that token close.</i>
-FirstCrownCons_0_Content;Gain 1 <icon=S3_CrownToken> from the Supply.<br><br>During this Generation, players may spend <icon=S3_CrownToken> at the <b>Royal Decrees</b> location to enact laws in the King's name!
-CrownCons_Title;AWhispered Invitation
-CrownCons_Content;Once again, the Royal Envoy passes a small heavy token across the mahogany desk, accompanied by a knowing nod. The weight of the gold feels heavier than mere currency - it is the weight of authority itself.
-CrownCons_0_Content;Gain 1 <icon=S3_CrownToken> from the Supply.
+FirstCrownCons_Title;Royal Suspicions
+FirstCrownCons_Content;It was a slight misstep—an overly ambitious trial that drew the gaze of the King's magistrate. With the lamplight of royal scrutiny now shining upon our work, what we could once stash away in the shadows was laid bare before the Crown.
+FirstCrownCons_0_Content;The player who triggered this event removes their <icon=Creepy_Icon> Marker from the <icon=Creepy_Icon> Track and places it on top of their Score Track Marker.<br><br>For the remainder of the game, each time you gain <icon=Creepy_Icon>, <b>lose 1VP</b> instead.
+CrownCons_Title;Royal Suspicions
+CrownCons_Content;Now that the Crown's notice had fallen upon us, the penalty was not as dire, but still carried with it permanent consequences. With the lamplight shone upon my work, what I could once stash away in the shadows now was laid bare.
+CrownCons_0_Content;The player who triggered this event removes their <icon=Creepy_Icon> Marker from the <icon=Creepy_Icon> Track and places it on top of their Score Track Marker.<br><br>For the remainder of the game, each time you gain <icon=Creepy_Icon>, <b>lose 1VP</b> instead.
 ReignIntro_Title;The Halls of Power
 ReignIntro_Content1;How many <icon=S3_CrownToken> will this player spend (in addition to the 1 required for the action space) to issue a Royal Decree?<br><br><link=0>0</link> | <link=1>1</link> | <link=2>2</link> | <link=3>3</link>
 ReignHUB_Title;Royal Decrees
@@ -465,13 +465,13 @@ CommemorativeStatueEventRes_Title;Unveiling the Monument
 CommemorativeStatueEventRes_Content;The player who won the bid may choose which player the commemorative statue is erected in honor of.
 CommemorativeStatueEventRes_0_Content;<b>{{0=_}}</b> pays their bid to the Supply (all other players keep their bids) and immediately gains 5VP!
 CommemorativeStatueEventResb_Title;The Town Square Transformed
-CommemorativeStatueEventResb_Content;For the remainder of the generation, the base of <b>{{0=_}}</b>'s statue becomes a gathering place for loyalists, petitioners, and royal heralds.
+CommemorativeStatueEventResb_Content;<b>{{0=_}}</b> gains <b>5VP</b>.<br><br>Turn to page <b>10</b> of the Village Chronicle.
 CommemorativeStatueEventResb_0_Content;Place the <b>Commemorative Statue</b> Storybook card over the <b>Farmer's Market</b> location.<br><br>Whenever any player visits this location, they must select their name in the app!
 CommemorativeSignIn_Title;At the Foot of the Statue
 CommemorativeSignIn_Content1;Which player is visiting the Commemorative Statue?{{0=?|<br><br><link=0>{{1=_}}</link>}}{{2=?|<br><br><link=1>{{3=_}}</link>}}{{4=?|<br><br><link=2>{{5=_}}</link>}}{{6=?|<br><br><link=3>{{7=_}}</link>}}{{8=?|<br><br><link=4>{{9=_}}</link>}}
 CommemorativeMAIN_Title;Basking in Bronze Glory
 CommemorativeMAIN_Content;Although the craftmanship was amateurish and the marble of lower grade than expected, I was once again stunned into silence as I arrived to marvel at the statue. What it lacked in polish, it excelled in artistic passion!<br><br>The picturesque monument always set my heart beating and drove me to tears. Sobbing into my handkerchief, I could feel the doubts melt away.<br><br>What an inspiration!
-CommemorativeMAIN_0_Content;<b>{{0=_}}</b> gains $3, 1 Ingredient of their choice, and 2VP!
+CommemorativeMAIN_0_Content;<b>{{0=_}}</b> may perform one of two available actions:<br><br>• <b>Lose 2 <icon=Creepy_Icon></b>.<br>• <b>Lose 2 <icon=Insanity_Icon></b> and move the <icon=S3_CrownToken> token 1 space in the direction of your choice.
 CommemorativeOTHER_Title;In Another's Shadow
 CommemorativeOTHER_Content;How could they construct such a ghastly structure in the vague form of an unworthy clod? The thought set my features to crease into an ugly sneer {{0=|as I ventured nearer the dismal, gray statue.|as a chill wind swept debris about the cracked foundation.}}<br><br>And yet, set upon by the emotional heft of this abomination, I felt at once reinvigorated. For while love in its most passionate form was known to revive the soul, it is hate which raises the blood to the cheeks and sets the mind to precise action. I spoke a curse so vile I felt the lilacs wilt at the base of the wretched monument and spat upon the ground thrice.<br><br>My cousin may have enjoyed their victory in that moment, but soon I would be the one standing upon the pedestal... the pedestal of science!
 CommemorativeOTHER_0_Content;<b>{{0=signincomm}}</b> may search an Experiment deck and draw the card of their choice. <i>Reshuffle the deck afterwards.</i>
@@ -678,7 +678,7 @@ Reign8b_Title;Thanks from the Advisor
 ReignIntro_Content;{{0=?|The royal advisor had anticipated my visit and breathed a sigh of relief when I entered. Clearly the responsibility did not suit him. I was all too happy to encourage that attitude.|The new Unified Monarchist building felt distinctly out of place in the town center - as distant in tone and architecture as the royal capitol from the countryside. The royal advisor himself was similarly off kilter. He was a portly man of considerable age with a gray moustache, stiff and twirled. His bright clothes ballooned in all directions.}}<br><br>I had sent a brief correspondence in advance, so I signed the guest book and entered quickly with practiced etiquette.<br><br><b>Please click on your name:</b>
 RoyalPriceisRight_1_Content;Turn to page <b>9</b> of the Village Chronicle.{{0=?|<br><br>Then, since this is a 3 player game, pass the starting player marker clockwise 1 additional time.|}}
 CostStick1_0_Content;Any player who has a <icon=S3_WoodenFigureToken> token returns it to the Scenario box and <b>gains $2</b>.
-FigureontheTrackIn_1_Content;Place the Storybook device back where all players can see it. Click to continue.
+FigureontheTrackIn_1_Content;<b>Gain 2 <icon=Creepy_Icon>.</b><br><br>Place the Storybook device back where all players can see it. Click to continue.
 FigureontheTrackIn_Content;Pass the Storybook device to the player with the <b>{{0=figure}}</b> token.
 FigureontheTrackInb_0_Content;Remove the Suspicion Marker and <icon=AngryMob_Icon> Marker from the <icon=Creepy_Icon> Track. The player with the {{0=figure}} token places it on space <b>{{1=accolade}}</b> of the <icon=Creepy_Icon> Track.<br /><br />The first time a player's marker ever reaches or exceeds the <b>{{0=figure}}</b> token, <b>{{2=?|they may immediately build a Vanity Estate Upgrade of their choice|they may immediately take a Perform Experiment action}}</b>.
 FutureStick_0_Content;Any player who has a <icon=S3_WoodenFigureToken> token returns it to the Scenario box and takes an <b>Advanced Ingredient</b> of their choice.
